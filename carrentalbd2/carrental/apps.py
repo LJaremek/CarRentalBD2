@@ -20,7 +20,7 @@ class CarrentalConfig(AppConfig):
             'Insurance.json',
             'InsuranceCompany.json',
             'RepairWorkshop.json',
-            # 'Repair.json'
+            'Repair.json',
             'Rental.json',
             'TrafficViolation.json',
             'Raport.json',

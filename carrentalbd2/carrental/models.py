@@ -64,7 +64,6 @@ class CarModel(models.Model):
     type_id = models.ForeignKey(CarType, null=True, on_delete=models.SET_NULL)
     price_list_id = models.ForeignKey(PriceList, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=50, null=False, unique=False)
-    produced_date = models.DateTimeField(null=False)
     seats_number = models.PositiveIntegerField(null=False)
     trunk_capacity = models.PositiveIntegerField(null=True)
     doors_number = models.PositiveIntegerField(null=False)
@@ -127,10 +126,10 @@ class InsuranceCompany(models.Model):
 
 class Repair(models.Model):
     repair_workshop_id = XORForeignKey(
-        RepairWorkshop, on_delete=models.CASCADE, xor_fields=["insurance_company_id"]
+        RepairWorkshop, on_delete=models.CASCADE, xor_fields=["insurance_company_id"], null=True
     )
     insurance_company_id = XORForeignKey(
-        InsuranceCompany, on_delete=models.CASCADE, xor_fields=["repair_workshop_id"]
+        InsuranceCompany, on_delete=models.CASCADE, xor_fields=["repair_workshop_id"], null=True
     )
     cost = models.PositiveIntegerField(null=True)
     start_date = models.DateTimeField(null=True)
