@@ -1,0 +1,10 @@
+[
+    {
+        "model": "carrental.PriceList",
+        "pk": 1,
+        "fields": {
+            "price_per_hour": 100,
+            "price_per_kilometer": 100
+        }
+    }
+]

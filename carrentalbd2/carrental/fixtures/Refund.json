@@ -1,0 +1,12 @@
+[
+    {
+        "model": "carrental.refund",
+        "pk": 1,
+        "fields":
+        {
+            "rental_id": 1,
+            "amount": 50.0,
+            "description": "Refund for cancellation due to unexpected circumstances.",
+            "apologise_message": "We apologize for the inconvenience caused."
+            }
+        },    {        "model": "carrental.refund",        "pk": 2,        "fields": {            "rental_id": 3,            "amount": 25.0,            "description": "Refund for early return of vehicle.",            "apologise_message": "We apologize for any confusion caused."        }    },    {        "model": "carrental.refund",        "pk": 3,        "fields": {            "rental_id": 5,            "amount": 75.0,            "description": "Refund for vehicle maintenance issues.",            "apologise_message": "We apologize for any inconvenience caused."        }    }]

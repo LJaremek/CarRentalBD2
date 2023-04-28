@@ -24,12 +24,24 @@ class Person(Client):
     pesel = models.CharField(max_length=20, null=False, unique=True)
     first_name = models.CharField(max_length=50, null=False, unique=False)
     second_name = models.CharField(max_length=50, null=False, unique=False)
+    parent = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+        related_name="children_person",
+        default=None
+        )
 
 
 class Company(Client):
     nip = models.CharField(max_length=50, null=False, unique=True)
     sector = models.CharField(max_length=50)
     name = models.CharField(max_length=50, null=False, unique=True)
+    parent = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+        related_name="children_company",
+        default=None
+        )
 
 
 class Brand(models.Model):
@@ -72,10 +84,9 @@ class Car(models.Model):
     insurance_start_date = models.DateTimeField(null=True)
     insurance_end_date = models.DateTimeField(null=True)
 
-
 class Rental(models.Model):
     client_id = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
-    car_id = models.OneToOneField(Car, null=True, on_delete=models.SET_NULL)
+    car_id = models.ForeignKey(Car, null=True, on_delete=models.SET_NULL)
     station_id = models.ForeignKey(RentalStation, null=True, on_delete=models.SET_NULL)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
@@ -137,3 +148,4 @@ class Insurance(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     company = models.CharField(max_length=150)
+

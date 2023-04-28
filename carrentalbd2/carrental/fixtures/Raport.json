@@ -1,0 +1,128 @@
+[
+    {
+      "model": "carrental.report",
+      "pk": 1,
+      "fields": {
+        "rental_id": 1,
+        "description": "The car had a scratch on the left side",
+        "rate": 3
+      }
+    },
+    {
+      "model": "carrental.report",
+      "pk": 2,
+      "fields": {
+        "rental_id":2,
+        "description": "The car was dirty inside",
+        "rate": 5
+      }
+    },
+    {
+      "model": "carrental.report",
+      "pk": 3,
+      "fields": {
+        "rental_id": 3,
+        "description": "The car smelled like smoke",
+        "rate": 1
+      }
+    },
+    {
+      "model": "carrental.report",
+      "pk": 4,
+      "fields": {
+        "rental_id": 4,
+        "description": "The car had a flat tire",
+        "rate": 5
+      }
+    },
+    {
+      "model": "carrental.report",
+      "pk": 5,
+      "fields": {
+        "rental_id": 5,
+        "description": "The car was in great condition",
+        "rate": 5
+      }
+    },
+    {
+      "model": "carrental.report",
+      "pk": 6,
+      "fields": {
+        "rental_id": 6,
+        "description": "The car was missing the spare tire",
+        "rate": 8
+      }
+    },
+    {
+      "model": "carrental.report",
+      "pk": 7,
+      "fields": {
+        "rental_id": 7,
+        "description": "The car had a broken side mirror",
+        "rate": 7
+      }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 8,
+    "fields": {
+        "rental_id": 8,
+        "description": "The car had a scratch on the left side",
+        "rate": 3
+    }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 9,
+    "fields": {
+        "rental_id":9,
+        "description": "The car was dirty inside",
+        "rate": 5
+    }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 10,
+    "fields": {
+        "rental_id": 10,
+        "description": "The car smelled like smoke",
+        "rate": 1
+    }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 11,
+    "fields": {
+        "rental_id": 11,
+        "description": "The car had a flat tire",
+        "rate": 5
+    }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 12,
+    "fields": {
+        "rental_id": 12,
+        "description": "The car was in great condition",
+        "rate": 5
+    }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 13,
+    "fields": {
+        "rental_id": 13,
+        "description": "The car was missing the spare tire",
+        "rate": 8
+    }
+    },
+    {
+    "model": "carrental.report",
+    "pk": 14,
+    "fields": {
+        "rental_id": 14,
+        "description": "The car had a broken side mirror",
+        "rate": 7
+    }
+    }
+]

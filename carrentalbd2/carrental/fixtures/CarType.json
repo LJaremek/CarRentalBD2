@@ -1,0 +1,106 @@
+[
+    {
+        "model": "carrental.CarType",
+        "pk": 1,
+        "fields": {
+            "name": "2-wheel and 3-wheel vehicles",
+            "driving_license": "AM"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 2,
+        "fields": {
+            "name": "light motorcycles",
+            "driving_license": "A1"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 3,
+        "fields": {
+            "name": "motorcycles under 35 kW",
+            "driving_license": "A2"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 4,
+        "fields": {
+            "name": "heavy motorcycles",
+            "driving_license": "A"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 5,
+        "fields": {
+            "name": "passenger vehicles up to 3,500 kg and up to 8 passengers",
+            "driving_license": "B"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 6,
+        "fields": {
+            "name": "B with heavy trailer of under 3,500 kg",
+            "driving_license": "BE"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 7,
+        "fields": {
+            "name": "quadricycles",
+            "driving_license": "B1"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 8,
+        "fields": {
+            "name": "goods vehicles between 3,500 kg and 7,500 kg, up to 8 passengers",
+            "driving_license": "C1"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 9,
+        "fields": {
+            "name": "C1 or B with a heavy trailer. Mass to 12 000 kg",
+            "driving_license": "C1E"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 10,
+        "fields": {
+            "name": "goods vehicles more than 3,500 kg, less than eight passengers",
+            "driving_license": "C"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 11,
+        "fields": {
+            "name": "C towing a heavy trailer",
+            "driving_license": "CE"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 12,
+        "fields": {
+            "name": "passenger vehicles built for fewer than 16 passengers, no longer than 8 m",
+            "driving_license": "D1"
+        }
+    },
+    {
+        "model": "carrental.CarType",
+        "pk": 13,
+        "fields": {
+            "name": "D1 with a heavy trailer",
+            "driving_license": "DE"
+        }
+    }
+]

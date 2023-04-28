@@ -1,0 +1,52 @@
+[
+    {
+      "model": "carrental.trafficviolation",
+      "pk": 1,
+      "fields": {
+        "rental_id": 1,
+        "description": "Exceeded speed limit by 10 mph",
+        "fine": 100,
+        "penalty_points": 2
+      }
+    },
+    {
+      "model": "carrental.trafficviolation",
+      "pk": 2,
+      "fields": {
+        "rental_id": 2,
+        "description": "Ran a red light",
+        "fine": 200,
+        "penalty_points": 3
+      }
+    },
+    {
+      "model": "carrental.trafficviolation",
+      "pk": 3,
+      "fields": {
+        "rental_id": 3,
+        "description": "Illegal U-turn",
+        "fine": 150,
+        "penalty_points": 2
+      }
+    },
+    {
+      "model": "carrental.trafficviolation",
+      "pk": 4,
+      "fields": {
+        "rental_id": 5,
+        "description": "Parking in a handicapped spot",
+        "fine": 300,
+        "penalty_points": 4
+      }
+    },
+    {
+      "model": "carrental.trafficviolation",
+      "pk": 5,
+      "fields": {
+        "rental_id": 7,
+        "description": "Driving without a valid license",
+        "fine": 500,
+        "penalty_points": 6
+      }
+    }
+  ]

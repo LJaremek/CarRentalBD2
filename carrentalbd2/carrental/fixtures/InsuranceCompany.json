@@ -1,0 +1,74 @@
+[
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 1,
+      "fields": {
+        "ac": true,
+        "name": "Allstate",
+        "telephone": "555-1234"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 2,
+      "fields": {
+        "ac": false,
+        "name": "Geico",
+        "telephone": "555-5678"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 3,
+      "fields": {
+        "ac": true,
+        "name": "Progressive",
+        "telephone": "555-9012"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 4,
+      "fields": {
+        "ac": false,
+        "name": "State Farm",
+        "telephone": "555-3456"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 5,
+      "fields": {
+        "ac": true,
+        "name": "Nationwide",
+        "telephone": "555-7890"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 6,
+      "fields": {
+        "ac": false,
+        "name": "Farmers",
+        "telephone": "555-4321"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 7,
+      "fields": {
+        "ac": true,
+        "name": "Liberty Mutual",
+        "telephone": "555-8765"
+      }
+    },
+    {
+      "model": "carrental.insurancecompany",
+      "pk": 8,
+      "fields": {
+        "ac": false,
+        "name": "USAA",
+        "telephone": "555-2109"
+      }
+    }
+  ]

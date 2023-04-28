@@ -1,0 +1,102 @@
+[
+    {
+      "model": "carrental.insurance",
+      "pk": 1,
+      "fields": {
+        "car": 1,
+        "company": "Allstate",
+        "start_date": "2022-02-01",
+        "end_date": "2022-02-15"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 2,
+      "fields": {
+        "car": 2,
+        "company": "Geico",
+        "start_date": "2022-03-01",
+        "end_date": "2022-03-10"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 3,
+      "fields": {
+        "car": 3,
+        "company": "State Farm",
+        "start_date": "2022-01-01",
+        "end_date": "2022-01-31"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 4,
+      "fields": {
+        "car": 4,
+        "company": "Nationwide",
+        "start_date": "2021-12-01",
+        "end_date": "2021-12-31"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 5,
+      "fields": {
+        "car": 5,
+        "company": "Progressive",
+        "start_date": "2022-01-15",
+        "end_date": "2022-01-28"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 6,
+      "fields": {
+        "car": 6,
+        "company": "Allstate",
+        "start_date": "2021-11-01",
+        "end_date": "2021-11-15"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 7,
+      "fields": {
+        "car": 7,
+        "company": "Geico",
+        "start_date": "2022-04-01",
+        "end_date": "2022-04-15"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 8,
+      "fields": {
+        "car": 8,
+        "company": "State Farm",
+        "start_date": "2022-02-15",
+        "end_date": "2022-02-28"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 9,
+      "fields": {
+        "car": 9,
+        "company": "Nationwide",
+        "start_date": "2021-12-15",
+        "end_date": "2021-12-31"
+      }
+    },
+    {
+      "model": "carrental.insurance",
+      "pk": 10,
+      "fields": {
+        "car": 10,
+        "company": "Progressive",
+        "start_date": "2021-11-15",
+        "end_date": "2021-11-30"
+        }
+    }
+]

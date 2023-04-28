@@ -1,0 +1,74 @@
+[
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 1,
+      "fields": {
+        "name": "Auto-Service",
+        "address": "ul. Warszawska 15, 00-001 Warszawa",
+        "telephone": "+48 123 456 289"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 2,
+      "fields": {
+        "name": "Samochodowe ABC",
+        "address": "ul. Gdańska 20, 80-001 Gdańsk",
+        "telephone": "+48 111 122 333"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 3,
+      "fields": {
+        "name": "Warsztat Mechaniczny Janusz",
+        "address": "ul. Łódzka 10, 90-001 Łódź",
+        "telephone": "+48 222 383 444"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 4,
+      "fields": {
+        "name": "Auto Naprawa",
+        "address": "ul. Krakowska 5, 30-001 Kraków",
+        "telephone": "+48 555 666 177"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 5,
+      "fields": {
+        "name": "Mechanik Józek",
+        "address": "ul. Wrocławska 10, 50-001 Wrocław",
+        "telephone": "+48 777 888 499"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 6,
+      "fields": {
+        "name": "Auto-Mechanik",
+        "address": "ul. Poznańska 7, 60-001 Poznań",
+        "telephone": "+48 123 156 789"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 7,
+      "fields": {
+        "name": "Naprawa Samochodów",
+        "address": "ul. Katowicka 3, 40-001 Katowice",
+        "telephone": "+48 111 255 333"
+      }
+    },
+    {
+      "model": "carrental.RepairWorkshop",
+      "pk": 8,
+      "fields": {
+        "name": "Warsztat Auto-Service",
+        "address": "ul. Gdynska 25, 70-001 Szczecin",
+        "telephone": "+48 555 666 000"
+      }
+    }
+  ]
