@@ -1,0 +1,52 @@
+[
+    {
+        "model": "carrental.Person",
+        "pk": 1,
+        "fields": {
+            "pesel":"44433322211",
+            "first_name":"john",
+            "second_name":"doe",
+            "parent":1
+        }
+    },
+    {
+        "model": "carrental.Person",
+        "pk": 2,
+        "fields": {
+            "pesel":"44433322251",
+            "first_name":"jane",
+            "second_name":"doe",
+            "parent":2
+        }
+    },
+    {
+        "model": "carrental.Person",
+        "pk": 3,
+        "fields": {
+            "pesel":"44413322251",
+            "first_name":"jimmy",
+            "second_name":"jones",
+            "parent":3
+        }
+    },
+    {
+        "model": "carrental.Person",
+        "pk": 4,
+        "fields": {
+            "pesel":"44433822251",
+            "first_name":"janice",
+            "second_name":"jones",
+            "parent":4
+        }
+    },
+    {
+        "model": "carrental.Person",
+        "pk": 5,
+        "fields": {
+            "pesel":"44433322252",
+            "first_name":"bob",
+            "second_name":"smith",
+            "parent":5
+        }
+    }
+]

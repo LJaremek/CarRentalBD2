@@ -1,0 +1,90 @@
+[
+    {
+        "model": "carrental.client",
+        "pk": 1,
+        "fields": {
+            "login": "johndoe",
+            "email": "johndoe@example.com",
+            "password": "secretpassword",
+            "phone": "555-1234",
+            "country": "USA"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 2,
+        "fields": {
+            "login": "janedoe",
+            "email": "janedoe@example.com",
+            "password": "password123",
+            "phone": "555-5678",
+            "country": "Canada"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 3,
+        "fields": {
+            "login": "jimmyjones",
+            "email": "jimmyjones@example.com",
+            "password": "abc123",
+            "phone": "555-4321",
+            "country": "USA"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 4,
+        "fields": {
+            "login": "janicejones",
+            "email": "janicejones@example.com",
+            "password": "qwerty",
+            "phone": "555-8765",
+            "country": "Canada"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 5,
+        "fields": {
+            "login": "bobsmith",
+            "email": "bobsmith@example.com",
+            "password": "password1",
+            "phone": "555-1111",
+            "country": "USA"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 6,
+        "fields": {
+            "login": "sallysmith",
+            "email": "sallysmith@example.com",
+            "password": "password2",
+            "phone": "555-2222",
+            "country": "Canada"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 7,
+        "fields": {
+            "login": "tomjones",
+            "email": "tomjones@example.com",
+            "password": "password3",
+            "phone": "555-3333",
+            "country": "USA"
+        }
+    },
+    {
+        "model": "carrental.client",
+        "pk": 8,
+        "fields": {
+            "login": "jennyjones",
+            "email": "jennyjones@example.com",
+            "password": "password4",
+            "phone": "555-4444",
+            "country": "Canada"
+        }
+    }
+]

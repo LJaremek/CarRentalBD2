@@ -24,13 +24,23 @@ class Person(Client):
     pesel = models.CharField(max_length=20, null=False, unique=True)
     first_name = models.CharField(max_length=50, null=False, unique=False)
     second_name = models.CharField(max_length=50, null=False, unique=False)
-
+    parent = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+        related_name="children_person",
+        default=None
+        )
 
 class Company(Client):
     nip = models.CharField(max_length=50, null=False, unique=True)
     sector = models.CharField(max_length=50)
     name = models.CharField(max_length=50, null=False, unique=True)
-
+    parent = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+        related_name="children_company",
+        default=None
+        )
 
 class Brand(models.Model):
     name = models.CharField(max_length=50, unique=True, null=False)

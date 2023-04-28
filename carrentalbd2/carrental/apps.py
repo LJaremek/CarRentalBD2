@@ -6,11 +6,16 @@ class CarrentalConfig(AppConfig):
     name = 'carrental'
 
     def ready(self):
+
         model_files = [
             'CarType.json',
             'Brand.json',
             'PriceList.json',
             'CarModel.json',
+            'Client.json',
+            'Person.json',
+            'Company.json',
+
 
         ]
         for file in model_files:

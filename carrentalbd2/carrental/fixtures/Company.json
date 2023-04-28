@@ -1,0 +1,32 @@
+[
+    {
+        "model": "carrental.Company",
+        "pk": 6,
+        "fields": {
+            "nip":"465754647",
+            "sector":"transport",
+            "name":"panek",
+            "parent":6
+        }
+    },
+    {
+        "model": "carrental.Company",
+        "pk": 7,
+        "fields": {
+            "nip":"4657546543",
+            "sector":"transport",
+            "name":"Riviera transporty",
+            "parent":7
+        }
+    },
+    {
+        "model": "carrental.Company",
+        "pk": 8,
+        "fields": {
+            "nip":"111754647",
+            "sector":"przeprowadzki",
+            "name":"Kowalscy przeprowadzki",
+            "parent":8
+        }
+    }
+]
