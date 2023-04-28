@@ -23,4 +23,12 @@ python .\manage.py runserver
 ```
 W przeglądarce wywołujemy http://localhost:8000/admin/. Podajemy dane logowani utworzonego w poprzednim punkcie superusera.
 
+## Funkcjonalność aplikacyjna
+
+Po zalogowaniu do interfejsu administratora ukazują nam się utworzone obiekty. Możemy je usuwać, dodawać i edytować.
+
+## Funkcjonalność analityczno-raportowa
+
+W interfejsie mamy możliwość generowania wybranych wykresów. Wyświetlamy je poprzez: Reports -> Wybrany_Raport -> add
+
 
