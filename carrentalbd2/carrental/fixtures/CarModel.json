@@ -1,0 +1,170 @@
+[
+  {
+    "model": "carrental.CarModel",
+    "pk": 1,
+    "fields": {
+      "brand_id": 1,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Toyota Corolla",
+      "produced_date": "2021-01-01",
+      "seats_number": 5,
+      "trunk_capacity": 500,
+      "doors_number": 4
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 2,
+    "fields": {
+      "brand_id": 2,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Ford Mustang",
+      "produced_date": "2022-03-15",
+      "seats_number": 4,
+      "trunk_capacity": 250,
+      "doors_number": 2
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 3,
+    "fields": {
+      "brand_id": 3,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "BMW X5",
+      "produced_date": "2018-01-01",
+      "seats_number": 5,
+      "trunk_capacity": 500,
+      "doors_number": 4
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 4,
+    "fields": {
+      "brand_id": 4,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Peugeot 508",
+      "produced_date": "2020-03-15",
+      "seats_number": 5,
+      "trunk_capacity": 650,
+      "doors_number": 5
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 5,
+    "fields": {
+      "brand_id": 5,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Opel Corsa",
+      "produced_date": "2011-01-01",
+      "seats_number": 5,
+      "trunk_capacity": 300,
+      "doors_number": 5
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 6,
+    "fields": {
+      "brand_id": 6,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Renault Clio",
+      "produced_date": "2023-03-15",
+      "seats_number": 5,
+      "trunk_capacity": 750,
+      "doors_number": 5
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 7,
+    "fields": {
+      "brand_id": 7,
+      "type_id": 10,
+      "price_list_id": 1,
+      "name": "Wolkswagen Crafter",
+      "produced_date": "2017-01-01",
+      "seats_number": 3,
+      "trunk_capacity": 7500,
+      "doors_number": 3
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 8,
+    "fields": {
+      "brand_id": 8,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Skoda Octavia II",
+      "produced_date": "2006-03-15",
+      "seats_number": 5,
+      "trunk_capacity": 750,
+      "doors_number": 5
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 9,
+    "fields": {
+      "brand_id": 7,
+      "type_id": 12,
+      "price_list_id": 1,
+      "name": "Wolkswagen Crafter Bus",
+      "produced_date": "2000-01-01",
+      "seats_number": 20,
+      "trunk_capacity": 2500,
+      "doors_number": 3
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 10,
+    "fields": {
+      "brand_id": 9,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Daewoo Lanos",
+      "produced_date": "1987-03-15",
+      "seats_number": 4,
+      "trunk_capacity": 350,
+      "doors_number": 3
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 11,
+    "fields": {
+      "brand_id": 3,
+      "type_id": 4,
+      "price_list_id": 1,
+      "name": "BMW M 1000 R",
+      "produced_date": "2021-01-01",
+      "seats_number": 1,
+      "trunk_capacity": 0,
+      "doors_number": 0
+    }
+  },
+  {
+    "model": "carrental.CarModel",
+    "pk": 12,
+    "fields": {
+      "brand_id": 7,
+      "type_id": 5,
+      "price_list_id": 1,
+      "name": "Wolkswagen Passat II",
+      "produced_date": "1997-03-15",
+      "seats_number": 5,
+      "trunk_capacity": 750,
+      "doors_number": 5
+    }
+  }
+]

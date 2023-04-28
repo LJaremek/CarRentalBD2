@@ -1,0 +1,74 @@
+[
+    {
+        "model": "carrental.Brand",
+        "pk": 1,
+        "fields": {
+            "name": "Toyota",
+            "origin_country": "Japan"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 2,
+        "fields": {
+            "name": "Ford",
+            "origin_country": "United States"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 3,
+        "fields": {
+            "name": "BMW",
+            "origin_country": "Germany"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 4,
+        "fields": {
+            "name": "Peugeot",
+            "origin_country": "France"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 5,
+        "fields": {
+            "name": "Opel",
+            "origin_country": "Germany"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 6,
+        "fields": {
+            "name": "Renault",
+            "origin_country": "France"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 7,
+        "fields": {
+            "name": "Volkswagen",
+            "origin_country": "Germany"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 8,
+        "fields": {
+            "name": "Skoda",
+            "origin_country": "Czech Republic"
+        }
+    },
+    {
+        "model": "carrental.Brand",
+        "pk": 9,
+        "fields": {
+            "name": "Daewoo",
+            "origin_country": "South Korea"
+        }
+    }
+]
