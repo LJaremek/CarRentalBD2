@@ -31,6 +31,7 @@ class Person(Client):
         default=None
         )
 
+
 class Company(Client):
     nip = models.CharField(max_length=50, null=False, unique=True)
     sector = models.CharField(max_length=50)
@@ -41,6 +42,7 @@ class Company(Client):
         related_name="children_company",
         default=None
         )
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=50, unique=True, null=False)
@@ -81,7 +83,6 @@ class Car(models.Model):
     plate = models.CharField(null=False, unique=True, max_length=20)
     insurance_start_date = models.DateTimeField(null=True)
     insurance_end_date = models.DateTimeField(null=True)
-
 
 class Rental(models.Model):
     client_id = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
@@ -147,3 +148,4 @@ class Insurance(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     company = models.CharField(max_length=150)
+
