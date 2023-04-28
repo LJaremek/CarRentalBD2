@@ -142,10 +142,3 @@ class CarFault(models.Model):
     report_id = models.ForeignKey(Report, null=False, on_delete=models.CASCADE)
     repair_id = models.ForeignKey(Repair, null=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=250, null=False)
-
-
-class Insurance(models.Model):
-    car = models.ForeignKey(Car, null=True, on_delete=models.SET_NULL)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
-    company = models.CharField(max_length=150)

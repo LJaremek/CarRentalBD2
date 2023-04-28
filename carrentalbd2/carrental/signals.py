@@ -17,7 +17,6 @@ def create_initial_data(sender, **kwargs):
             "Company.json",
             "RentalStation.json",
             "Car.json",
-            "Insurance.json",
             "InsuranceCompany.json",
             "RepairWorkshop.json",
             "Repair.json",
