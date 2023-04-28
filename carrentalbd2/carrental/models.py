@@ -85,7 +85,7 @@ class Car(models.Model):
 
 class Rental(models.Model):
     client_id = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
-    car_id = models.OneToOneField(Car, null=True, on_delete=models.SET_NULL)
+    car_id = models.ForeignKey(Car, null=True, on_delete=models.SET_NULL)
     station_id = models.ForeignKey(RentalStation, null=True, on_delete=models.SET_NULL)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(blank=True, null=True)
