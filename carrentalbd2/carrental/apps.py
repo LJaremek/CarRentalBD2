@@ -15,6 +15,8 @@ class CarrentalConfig(AppConfig):
             'Client.json',
             'Person.json',
             'Company.json',
+            'RentalStation.json',
+            'Car.json'
 
 
         ]

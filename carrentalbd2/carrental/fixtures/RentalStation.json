@@ -1,0 +1,23 @@
+[
+    {
+      "model": "carrental.RentalStation",
+      "pk": 1,
+      "fields": {
+        "address": "ul. Polna 12, Warszawa"
+      }
+    },
+    {
+      "model": "carrental.RentalStation",
+      "pk": 2,
+      "fields": {
+        "address": "ul. Podgórna 5, Kraków"
+      }
+    },
+    {
+      "model": "carrental.RentalStation",
+      "pk": 3,
+      "fields": {
+        "address": "ul. Wrocławska 3, Poznań"
+      }
+    }
+  ]

@@ -1,0 +1,218 @@
+[
+    {
+      "model": "carrental.car",
+      "pk": 1,
+      "fields": {
+        "car_model": 1,
+        "rental_station_id": 1,
+        "car_status": "free",
+        "insurance_start_date": "2023-05-01",
+        "insurance_end_date": "2023-11-01",
+        "plate": "XYZ12t"
+      }
+    },
+    {
+      "model": "carrental.car",
+      "pk": 2,
+      "fields": {
+        "car_model": 2,
+        "rental_station_id": 1,
+        "car_status": "rented",
+        "insurance_start_date": "2023-06-01",
+        "insurance_end_date": "2023-12-01",
+        "plate": "ABC4u6"
+      }
+    },
+    {
+      "model": "carrental.car",
+      "pk": 3,
+      "fields": {
+        "car_model": 3,
+        "rental_station_id": 2,
+        "car_status": "free",
+        "insurance_start_date": "2023-07-01",
+        "insurance_end_date": "2024-01-01",
+        "plate": "DEF7i9"
+      }
+    },
+    {
+      "model": "carrental.car",
+      "pk": 4,
+      "fields": {
+        "car_model": 1,
+        "rental_station_id": 2,
+        "car_status": "free",
+        "insurance_start_date": "2023-08-01",
+        "insurance_end_date": "2024-02-01",
+        "plate": "GHIp12"
+      }
+    },
+    {
+      "model": "carrental.car",
+      "pk": 5,
+      "fields": {
+        "car_model": 2,
+        "rental_station_id": 3,
+        "car_status": "rented",
+        "insurance_start_date": "2023-09-01",
+        "insurance_end_date": "2024-03-01",
+        "plate": "JKLl45"
+      }
+    },
+    {
+      "model": "carrental.car",
+      "pk": 6,
+      "fields": {
+        "car_model": 3,
+        "rental_station_id": 3,
+        "car_status": "free",
+        "insurance_start_date": "2023-10-01",
+        "insurance_end_date": "2024-04-01",
+        "plate": "MNO6n8"
+      }
+    },
+    {
+        "model": "carrental.car",
+        "pk": 7,
+        "fields": {
+          "car_model": 4,
+          "rental_station_id": 3,
+          "car_status": "free",
+          "insurance_start_date": "2023-05-01",
+          "insurance_end_date": "2023-11-01",
+          "plate": "XYZ529"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 8,
+        "fields": {
+          "car_model": 2,
+          "rental_station_id": 1,
+          "car_status": "free",
+          "insurance_start_date": "2023-06-01",
+          "insurance_end_date": "2023-12-01",
+          "plate": "fBC45k"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 9,
+        "fields": {
+          "car_model": 5,
+          "rental_station_id": 3,
+          "car_status": "free",
+          "insurance_start_date": "2023-07-01",
+          "insurance_end_date": "2024-01-01",
+          "plate": "DEF79q"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 10,
+        "fields": {
+          "car_model": 8,
+          "rental_station_id": 2,
+          "car_status": "free",
+          "insurance_start_date": "2023-08-01",
+          "insurance_end_date": "2024-02-01",
+          "plate": "GHI0a2"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 11,
+        "fields": {
+          "car_model": 9,
+          "rental_station_id": 2,
+          "car_status": "free",
+          "insurance_start_date": "2023-09-01",
+          "insurance_end_date": "2024-03-01",
+          "plate": "uLL345"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 12,
+        "fields": {
+          "car_model": 10,
+          "rental_station_id": 1,
+          "car_status": "free",
+          "insurance_start_date": "2023-10-01",
+          "insurance_end_date": "2024-04-01",
+          "plate": "MaO6z8"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 13,
+        "fields": {
+          "car_model": 11,
+          "rental_station_id": 1,
+          "car_status": "free",
+          "insurance_start_date": "2023-05-01",
+          "insurance_end_date": "2023-11-01",
+          "plate": "XnZ12f"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 14,
+        "fields": {
+          "car_model": 12,
+          "rental_station_id": 1,
+          "car_status": "free",
+          "insurance_start_date": "2023-06-01",
+          "insurance_end_date": "2023-12-01",
+          "plate": "yBC4g6"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 15,
+        "fields": {
+          "car_model": 8,
+          "rental_station_id": 2,
+          "car_status": "free",
+          "insurance_start_date": "2023-07-01",
+          "insurance_end_date": "2024-01-01",
+          "plate": "DqFh89"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 16,
+        "fields": {
+          "car_model": 10,
+          "rental_station_id": 1,
+          "car_status": "free",
+          "insurance_start_date": "2023-08-01",
+          "insurance_end_date": "2024-02-01",
+          "plate": "GwI01r"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 17,
+        "fields": {
+          "car_model": 9,
+          "rental_station_id": 2,
+          "car_status": "free",
+          "insurance_start_date": "2023-09-01",
+          "insurance_end_date": "2024-03-01",
+          "plate": "JKL3m5"
+        }
+      },
+      {
+        "model": "carrental.car",
+        "pk": 18,
+        "fields": {
+          "car_model": 10,
+          "rental_station_id": 1,
+          "car_status": "free",
+          "insurance_start_date": "2023-10-01",
+          "insurance_end_date": "2024-04-01",
+          "plate": "vNO6n8"
+        }
+      }
+]
