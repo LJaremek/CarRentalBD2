@@ -6,8 +6,8 @@
         "insurance_company_id": null,
         "repair_workshop_id": 1,
         "cost": 250.0,
-        "start_date": "2022-03-15",
-        "end_date": "2022-03-18"
+        "start_date": "2022-03-15T15:30:00+02:00",
+        "end_date": "2022-03-18T15:30:00+02:00"
       }
     },
     {
@@ -17,8 +17,8 @@
         "insurance_company_id": 2,
         "repair_workshop_id": null,
         "cost": 500.0,
-        "start_date": "2022-04-01",
-        "end_date": "2022-04-04"
+        "start_date": "2022-04-01T15:30:00+02:00",
+        "end_date": "2022-04-04T15:30:00+02:00"
       }
     },
     {
@@ -28,8 +28,8 @@
         "insurance_company_id": null,
         "repair_workshop_id": 3,
         "cost": 1000.0,
-        "start_date": "2022-05-10",
-        "end_date": "2022-05-15"
+        "start_date": "2022-05-10T15:30:00+02:00",
+        "end_date": "2022-05-15T15:30:00+02:00"
       }
     },
     {
@@ -39,8 +39,8 @@
         "insurance_company_id": 1,
         "repair_workshop_id": null,
         "cost": 750.0,
-        "start_date": "2022-06-20",
-        "end_date": "2022-06-23"
+        "start_date": "2022-06-20T15:30:00+02:00",
+        "end_date": "2022-06-23T15:30:00+02:00"
       }
     },
     {
@@ -50,8 +50,8 @@
         "insurance_company_id": null,
         "repair_workshop_id": 3,
         "cost": 1500.0,
-        "start_date": "2022-07-05",
-        "end_date": "2022-07-10"
+        "start_date": "2022-07-05T15:30:00+02:00",
+        "end_date": "2022-07-10T15:30:00+02:00"
       }
     },
     {
@@ -61,8 +61,8 @@
         "insurance_company_id": null,
         "repair_workshop_id": 5,
         "cost": 200.0,
-        "start_date": "2022-08-15",
-        "end_date": "2022-08-18"
+        "start_date": "2022-08-15T15:30:00+02:00",
+        "end_date": "2022-08-18T15:30:00+02:00"
       }
     },
     {
@@ -72,8 +72,8 @@
         "insurance_company_id": 7,
         "repair_workshop_id": null,
         "cost": 900.0,
-        "start_date": "2022-09-01",
-        "end_date": "2022-09-04"
+        "start_date": "2022-09-01T15:30:00+02:00",
+        "end_date": "2022-09-04T15:30:00+02:00"
       }
     },
     {
@@ -83,8 +83,8 @@
         "insurance_company_id": 8,
         "repair_workshop_id": null,
         "cost": 300.0,
-        "start_date": "2022-10-10",
-        "end_date": "2022-10-15"
+        "start_date": "2022-10-10T15:30:00+02:00",
+        "end_date": "2022-10-15T15:30:00+02:00"
       }
     },
     {
@@ -94,8 +94,8 @@
         "insurance_company_id": 6,
         "repair_workshop_id": null,
         "cost": 1200.0,
-        "start_date": "2022-11-20",
-        "end_date": "2022-11-26"
+        "start_date": "2022-11-20T15:30:00+02:00",
+        "end_date": "2022-11-26T15:30:00+02:00"
       }
     }
 ]

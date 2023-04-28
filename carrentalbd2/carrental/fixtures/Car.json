@@ -6,8 +6,8 @@
         "car_model": 1,
         "rental_station_id": 1,
         "car_status": "free",
-        "insurance_start_date": "2023-05-01",
-        "insurance_end_date": "2023-11-01",
+        "insurance_start_date": "2023-05-01T15:30:00+02:00",
+        "insurance_end_date": "2023-11-01T15:30:00+02:00",
         "plate": "XYZ12t"
       }
     },
@@ -18,8 +18,8 @@
         "car_model": 2,
         "rental_station_id": 1,
         "car_status": "rented",
-        "insurance_start_date": "2023-06-01",
-        "insurance_end_date": "2023-12-01",
+        "insurance_start_date": "2023-06-01T15:30:00+02:00",
+        "insurance_end_date": "2023-12-01T15:30:00+02:00",
         "plate": "ABC4u6"
       }
     },
@@ -30,8 +30,8 @@
         "car_model": 3,
         "rental_station_id": 2,
         "car_status": "free",
-        "insurance_start_date": "2023-07-01",
-        "insurance_end_date": "2024-01-01",
+        "insurance_start_date": "2023-07-01T15:30:00+02:00",
+        "insurance_end_date": "2024-01-01T15:30:00+02:00",
         "plate": "DEF7i9"
       }
     },
@@ -42,8 +42,8 @@
         "car_model": 1,
         "rental_station_id": 2,
         "car_status": "free",
-        "insurance_start_date": "2023-08-01",
-        "insurance_end_date": "2024-02-01",
+        "insurance_start_date": "2023-08-01T15:30:00+02:00",
+        "insurance_end_date": "2024-02-01T15:30:00+02:00",
         "plate": "GHIp12"
       }
     },
@@ -54,8 +54,8 @@
         "car_model": 2,
         "rental_station_id": 3,
         "car_status": "rented",
-        "insurance_start_date": "2023-09-01",
-        "insurance_end_date": "2024-03-01",
+        "insurance_start_date": "2023-09-01T15:30:00+02:00",
+        "insurance_end_date": "2024-03-01T15:30:00+02:00",
         "plate": "JKLl45"
       }
     },
@@ -66,8 +66,8 @@
         "car_model": 3,
         "rental_station_id": 3,
         "car_status": "free",
-        "insurance_start_date": "2023-10-01",
-        "insurance_end_date": "2024-04-01",
+        "insurance_start_date": "2023-10-01T15:30:00+02:00",
+        "insurance_end_date": "2024-04-01T15:30:00+02:00",
         "plate": "MNO6n8"
       }
     },
@@ -78,8 +78,8 @@
           "car_model": 4,
           "rental_station_id": 3,
           "car_status": "free",
-          "insurance_start_date": "2023-05-01",
-          "insurance_end_date": "2023-11-01",
+          "insurance_start_date": "2023-05-01T15:30:00+02:00",
+          "insurance_end_date": "2023-11-01T15:30:00+02:00",
           "plate": "XYZ529"
         }
       },
@@ -90,8 +90,8 @@
           "car_model": 2,
           "rental_station_id": 1,
           "car_status": "free",
-          "insurance_start_date": "2023-06-01",
-          "insurance_end_date": "2023-12-01",
+          "insurance_start_date": "2023-06-01T15:30:00+02:00",
+          "insurance_end_date": "2023-12-01T15:30:00+02:00",
           "plate": "fBC45k"
         }
       },
@@ -102,8 +102,8 @@
           "car_model": 5,
           "rental_station_id": 3,
           "car_status": "free",
-          "insurance_start_date": "2023-07-01",
-          "insurance_end_date": "2024-01-01",
+          "insurance_start_date": "2023-07-01T15:30:00+02:00",
+          "insurance_end_date": "2024-01-01T15:30:00+02:00",
           "plate": "DEF79q"
         }
       },
@@ -114,8 +114,8 @@
           "car_model": 8,
           "rental_station_id": 2,
           "car_status": "free",
-          "insurance_start_date": "2023-08-01",
-          "insurance_end_date": "2024-02-01",
+          "insurance_start_date": "2023-08-01T15:30:00+02:00",
+          "insurance_end_date": "2024-02-01T15:30:00+02:00",
           "plate": "GHI0a2"
         }
       },
@@ -126,8 +126,8 @@
           "car_model": 9,
           "rental_station_id": 2,
           "car_status": "free",
-          "insurance_start_date": "2023-09-01",
-          "insurance_end_date": "2024-03-01",
+          "insurance_start_date": "2023-09-01T15:30:00+02:00",
+          "insurance_end_date": "2024-03-01T15:30:00+02:00",
           "plate": "uLL345"
         }
       },
@@ -138,8 +138,8 @@
           "car_model": 10,
           "rental_station_id": 1,
           "car_status": "free",
-          "insurance_start_date": "2023-10-01",
-          "insurance_end_date": "2024-04-01",
+          "insurance_start_date": "2023-10-01T15:30:00+02:00",
+          "insurance_end_date": "2024-04-01T15:30:00+02:00",
           "plate": "MaO6z8"
         }
       },
@@ -150,8 +150,8 @@
           "car_model": 11,
           "rental_station_id": 1,
           "car_status": "free",
-          "insurance_start_date": "2023-05-01",
-          "insurance_end_date": "2023-11-01",
+          "insurance_start_date": "2023-05-01T15:30:00+02:00",
+          "insurance_end_date": "2023-11-01T15:30:00+02:00",
           "plate": "XnZ12f"
         }
       },
@@ -162,8 +162,8 @@
           "car_model": 12,
           "rental_station_id": 1,
           "car_status": "free",
-          "insurance_start_date": "2023-06-01",
-          "insurance_end_date": "2023-12-01",
+          "insurance_start_date": "2023-06-01T15:30:00+02:00",
+          "insurance_end_date": "2023-12-01T15:30:00+02:00",
           "plate": "yBC4g6"
         }
       },
@@ -174,8 +174,8 @@
           "car_model": 8,
           "rental_station_id": 2,
           "car_status": "free",
-          "insurance_start_date": "2023-07-01",
-          "insurance_end_date": "2024-01-01",
+          "insurance_start_date": "2023-07-01T15:30:00+02:00",
+          "insurance_end_date": "2024-01-01T15:30:00+02:00",
           "plate": "DqFh89"
         }
       },
@@ -186,8 +186,8 @@
           "car_model": 10,
           "rental_station_id": 1,
           "car_status": "free",
-          "insurance_start_date": "2023-08-01",
-          "insurance_end_date": "2024-02-01",
+          "insurance_start_date": "2023-08-01T15:30:00+02:00",
+          "insurance_end_date": "2024-02-01T15:30:00+02:00",
           "plate": "GwI01r"
         }
       },
@@ -198,8 +198,8 @@
           "car_model": 9,
           "rental_station_id": 2,
           "car_status": "free",
-          "insurance_start_date": "2023-09-01",
-          "insurance_end_date": "2024-03-01",
+          "insurance_start_date": "2023-09-01T15:30:00+02:00",
+          "insurance_end_date": "2024-03-01T15:30:00+02:00",
           "plate": "JKL3m5"
         }
       },
@@ -210,8 +210,8 @@
           "car_model": 10,
           "rental_station_id": 1,
           "car_status": "free",
-          "insurance_start_date": "2023-10-01",
-          "insurance_end_date": "2024-04-01",
+          "insurance_start_date": "2023-10-01T15:30:00+02:00",
+          "insurance_end_date": "2024-04-01T15:30:00+02:00",
           "plate": "vNO6n8"
         }
       }
