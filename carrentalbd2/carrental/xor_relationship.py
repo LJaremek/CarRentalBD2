@@ -27,4 +27,3 @@ class XORForeignKey(models.ForeignKey):
         defaults = {"form_class": ModelChoiceField}
         defaults.update(kwargs)
         return super().formfield(**defaults)
-      

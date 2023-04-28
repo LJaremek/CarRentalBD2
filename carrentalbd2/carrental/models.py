@@ -25,11 +25,8 @@ class Person(Client):
     first_name = models.CharField(max_length=50, null=False, unique=False)
     second_name = models.CharField(max_length=50, null=False, unique=False)
     parent = models.ForeignKey(
-        Client,
-        on_delete=models.CASCADE,
-        related_name="children_person",
-        default=None
-        )
+        Client, on_delete=models.CASCADE, related_name="children_person", default=None
+    )
 
 
 class Company(Client):
@@ -37,11 +34,8 @@ class Company(Client):
     sector = models.CharField(max_length=50)
     name = models.CharField(max_length=50, null=False, unique=True)
     parent = models.ForeignKey(
-        Client,
-        on_delete=models.CASCADE,
-        related_name="children_company",
-        default=None
-        )
+        Client, on_delete=models.CASCADE, related_name="children_company", default=None
+    )
 
 
 class Brand(models.Model):
@@ -83,6 +77,7 @@ class Car(models.Model):
     plate = models.CharField(null=False, unique=True, max_length=20)
     insurance_start_date = models.DateTimeField(null=True)
     insurance_end_date = models.DateTimeField(null=True)
+
 
 class Rental(models.Model):
     client_id = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
@@ -127,10 +122,16 @@ class InsuranceCompany(models.Model):
 
 class Repair(models.Model):
     repair_workshop_id = XORForeignKey(
-        RepairWorkshop, on_delete=models.CASCADE, xor_fields=["insurance_company_id"], null=True
+        RepairWorkshop,
+        on_delete=models.CASCADE,
+        xor_fields=["insurance_company_id"],
+        null=True,
     )
     insurance_company_id = XORForeignKey(
-        InsuranceCompany, on_delete=models.CASCADE, xor_fields=["repair_workshop_id"], null=True
+        InsuranceCompany,
+        on_delete=models.CASCADE,
+        xor_fields=["repair_workshop_id"],
+        null=True,
     )
     cost = models.PositiveIntegerField(null=True)
     start_date = models.DateTimeField(null=True)
@@ -148,4 +149,3 @@ class Insurance(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     company = models.CharField(max_length=150)
-
