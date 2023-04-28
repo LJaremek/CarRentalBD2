@@ -52,6 +52,7 @@ class CarModel(models.Model):
     type_id = models.ForeignKey(CarType, null=True, on_delete=models.SET_NULL)
     price_list_id = models.ForeignKey(PriceList, null=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=50, null=False, unique=False)
+    produced_date = models.DateTimeField(null=False)
     seats_number = models.PositiveIntegerField(null=False)
     trunk_capacity = models.PositiveIntegerField(null=True)
     doors_number = models.PositiveIntegerField(null=False)
@@ -67,7 +68,6 @@ class Car(models.Model):
         RentalStation, null=True, on_delete=models.CASCADE
     )
     car_model = models.ForeignKey(CarModel, null=True, on_delete=models.CASCADE)
-    produced_date = models.DateTimeField(null=False)
     plate = models.CharField(null=False, unique=True, max_length=20)
     insurance_start_date = models.DateTimeField(null=True)
     insurance_end_date = models.DateTimeField(null=True)
