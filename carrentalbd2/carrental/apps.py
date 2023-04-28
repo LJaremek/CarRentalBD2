@@ -18,9 +18,9 @@ class CarrentalConfig(AppConfig):
             'RentalStation.json',
             'Car.json',
             'Insurance.json',
-            'InsuranceCompany.json'
-
-
+            'InsuranceCompany.json',
+            'RepairWorkshop.json',
+            'Repiar.json'
         ]
         for file in model_files:
             call_command('loaddata', file)
