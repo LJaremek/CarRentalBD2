@@ -12,13 +12,14 @@ pip install -r requirements.txt
 python .\manage.py makemigrations carrental
 python .\manage.py migrate
 ```
+## Tworzenie admina
+```
+python .\manage.py createsuperuser
+```
 
 ## Uruchomienie servera
 ```
 python .\manage.py runserver
 ```
 
-## Tworzenie admina
-```
-python .\manage.py createsuperuser
-```
+
