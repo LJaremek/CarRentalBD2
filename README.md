@@ -21,5 +21,6 @@ python .\manage.py createsuperuser
 ```
 python .\manage.py runserver
 ```
+W przeglądarce wywołujemy http://localhost:8000/admin/. Podajemy dane logowani utworzonego w poprzednim punkcie superusera.
 
 
