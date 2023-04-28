@@ -67,6 +67,7 @@ class CarModel(models.Model):
     seats_number = models.PositiveIntegerField(null=False)
     trunk_capacity = models.PositiveIntegerField(null=True)
     doors_number = models.PositiveIntegerField(null=False)
+    produced_date = models.DateField(blank=True, null=True)
 
 
 class RentalStation(models.Model):
