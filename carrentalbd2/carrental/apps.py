@@ -22,6 +22,8 @@ class CarrentalConfig(AppConfig):
             'RepairWorkshop.json',
             # 'Repair.json'
             'Rental.json',
+            'TrafficViolation.json',
+            'Raport.json',
         ]
         for file in model_files:
             call_command('loaddata', file)
