@@ -9,7 +9,7 @@ pip install -r requirements.txt
 
 ## Robienie migracji
 ```
-python .\manage.py makemigrations carrental
+python .\manage.py makemigrations
 python .\manage.py migrate
 ```
 ## Tworzenie admina
