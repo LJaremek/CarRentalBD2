@@ -110,7 +110,7 @@ class Report(models.Model):
 
 class RepairWorkshop(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True)
-    telephone = models.CharField(max_length=10, null=True, unique=True)
+    telephone = models.CharField(max_length=50, null=True, unique=True)
     address = models.CharField(max_length=50, null=False)
 
 

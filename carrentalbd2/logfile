@@ -1,0 +1,9 @@
+2023-05-23 16:03:19.707 CEST [4464] LOG:  starting PostgreSQL 12.9 on x86_64-conda-linux-gnu, compiled by x86_64-conda-linux-gnu-cc (Anaconda gcc) 11.2.0, 64-bit
+2023-05-23 16:03:19.707 CEST [4464] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-05-23 16:03:19.710 CEST [4464] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-05-23 16:03:19.718 CEST [4465] LOG:  database system was shut down at 2023-05-23 16:02:57 CEST
+2023-05-23 16:03:19.720 CEST [4464] LOG:  database system is ready to accept connections
+2023-05-23 16:08:29.778 CEST [4975] ERROR:  relation "carrental_cartype" does not exist at character 8
+2023-05-23 16:08:29.778 CEST [4975] STATEMENT:  UPDATE "carrental_cartype" SET "name" = '2-wheel and 3-wheel vehicles', "driving_license" = 'AM' WHERE "carrental_cartype"."id" = 1
+2023-05-23 16:10:38.670 CEST [5128] ERROR:  value too long for type character varying(10)
+2023-05-23 16:10:38.670 CEST [5128] STATEMENT:  UPDATE "carrental_repairworkshop" SET "name" = 'Auto-Service', "telephone" = '+48 123 456 289', "address" = 'ul. Warszawska 15, 00-001 Warszawa' WHERE "carrental_repairworkshop"."id" = 1
