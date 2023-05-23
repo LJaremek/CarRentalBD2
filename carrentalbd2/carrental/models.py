@@ -28,6 +28,10 @@ class Person(Client):
         Client, on_delete=models.CASCADE, related_name="children_person", default=None
     )
 
+    def __str__(self) -> str:
+        return self.first_name + " " + self.second_name
+
+
 
 class Company(Client):
     nip = models.CharField(max_length=50, null=False, unique=True)
@@ -36,6 +40,9 @@ class Company(Client):
     parent = models.ForeignKey(
         Client, on_delete=models.CASCADE, related_name="children_company", default=None
     )
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Brand(models.Model):
@@ -110,7 +117,7 @@ class Report(models.Model):
 
 class RepairWorkshop(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True)
-    telephone = models.CharField(max_length=10, null=True, unique=True)
+    telephone = models.CharField(max_length=50, null=True, unique=True)
     address = models.CharField(max_length=50, null=False)
 
 
