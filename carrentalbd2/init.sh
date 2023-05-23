@@ -4,7 +4,7 @@
 sudo apt-get install
 
 git pull
-
+sudo apt install postgresql
 sudo apt install python3-pip
 pip install -r requirements.txt
 
