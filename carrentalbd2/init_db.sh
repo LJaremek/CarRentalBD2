@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
 
-initdb -D database
-createuser --encrypted --pwprompt $2 --password $3
-createdb --owner=$2 $1
+sudo service postgresql start
+sudo -u postgres psql -f init.sql
