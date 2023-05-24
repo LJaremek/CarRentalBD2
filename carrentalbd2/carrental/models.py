@@ -11,7 +11,6 @@ CAR_STATUS = (
 
 RENTAL_STATUS = (("finished", "Finished"), ("ongoing", "Ongoing"), ("booked", "Booked"))
 
-
 class Client(models.Model):
     login = models.CharField(max_length=50, unique=True)
     email = models.CharField(max_length=50, unique=True)

@@ -16,5 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from carrental.views import log_screen_view, registration
 
-urlpatterns = [path("admin/", admin.site.urls)]
+urlpatterns = [
+                path("admin/", admin.site.urls),
+                path("", log_screen_view),
+                path("registration/", registration, name='registration'),
+            ]
