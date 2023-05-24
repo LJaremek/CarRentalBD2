@@ -7,3 +7,5 @@ carrentalbd2/carrental/migrations/__pycache__/
 carrentalbd2/reports/__pycache__/
 carrentalbd2/reports/migrations/__pycache__/
 carrentalbd2/reports/migrations/*
+*.pem
+__pycache__
