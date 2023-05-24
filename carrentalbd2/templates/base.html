@@ -73,6 +73,10 @@ span.psw {
   padding-top: 16px;
 }
 
+h1 {
+  text-align: center;
+}
+
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
   span.psw {
@@ -100,7 +104,12 @@ span.psw {
 </div>
 
 
-<form action="/action_page.php" method="post">
+<form action="{% url 'chech_log' %}" method="post">
+  {% csrf_token %}
+  {%if data_error %}
+  <h1>Błędne dane logowania</h1>
+  {% endif %}
+
   <div class="imgcontainer">
     <img src="{% static 'images/avatar.png' %}" alt="Avatar" class="avatar">
   </div>
@@ -117,7 +126,6 @@ span.psw {
 
 
 </form>
-
 
 </body>
 </html>

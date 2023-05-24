@@ -11,3 +11,7 @@ carrentalbd2/init_all.sh
 carrentalbd2/init.sh
 carrentalbd2/logfile
 carrentalbd2/run.sh
+carrentalbd2/reports/migrations/__pycache__/
+carrentalbd2/reports/__pycache__/
+carrentalbd2/reports/migrations
+carrentalbd2/main_key.pem
