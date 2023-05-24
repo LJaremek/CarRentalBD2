@@ -4,3 +4,7 @@ carrentalbd2/carrentalbd2/__pycache__/
 carrentalbd2/carrental/__pycache__/
 carrentalbd2/carrental/migrations/
 carrentalbd2/carrental/migrations/__pycache__/
+carrentalbd2/reports/migrations/__pycache__/
+carrentalbd2/reports/__pycache__/
+carrentalbd2/reports/migrations
+carrentalbd2/main_key.pem
