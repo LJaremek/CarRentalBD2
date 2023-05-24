@@ -19,6 +19,9 @@ class Client(models.Model):
     phone = models.CharField(max_length=10, unique=True, null=True)
     country = models.CharField(max_length=50, null=True)
 
+    def __str__(self) -> str:
+        return self.email
+
 
 class Person(Client):
     pesel = models.CharField(max_length=20, null=False, unique=True)
