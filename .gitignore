@@ -4,3 +4,10 @@ carrentalbd2/carrentalbd2/__pycache__/
 carrentalbd2/carrental/__pycache__/
 carrentalbd2/carrental/migrations/
 carrentalbd2/carrental/migrations/__pycache__/
+
+carrentalbd2/carrental/fixtures
+carrentalbd2/database
+carrentalbd2/init_all.sh
+carrentalbd2/init.sh
+carrentalbd2/logfile
+carrentalbd2/run.sh
