@@ -10,7 +10,7 @@ pip install -r requirements.txt
 
 ./init_db.sh postgres_db admin haslo1
 
-python3 ./manage.py makemigrations
-python3 ./manage.py migrate
+python3 ../manage.py makemigrations
+python3 ../manage.py migrate
 
 ./init_user.sh haslo1 admin admin@pw.pl

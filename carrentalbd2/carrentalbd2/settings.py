@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73"]
 INSTALLED_APPS = [
     "carrental.apps.CarrentalConfig",
     "reports.apps.ReportsConfig",
+    "authorization.apps.AuthorizationConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
