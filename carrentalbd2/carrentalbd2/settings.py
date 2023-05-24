@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-lg4dy#h+d#%y5=iw!+jy0j=r#6#^&rg)(u!04-(qbbatj6-x%6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73"]
+ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73", "127.0.0.1"]
 
 
 # Application definition
@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73"]
 INSTALLED_APPS = [
     "carrental.apps.CarrentalConfig",
     "reports.apps.ReportsConfig",
+    "authorization.apps.AuthorizationConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
