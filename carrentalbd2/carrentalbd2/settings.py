@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-lg4dy#h+d#%y5=iw!+jy0j=r#6#^&rg)(u!04-(qbbatj6-x%6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73"]
+ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73", "127.0.0.1"]
 
 
 # Application definition
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
     "django_matplotlib",
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 GRAPH_MODELS = {"all_applications": True, "graph_models": True}
+
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "auth/login_user"
