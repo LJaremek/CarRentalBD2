@@ -28,7 +28,7 @@ def registration(request):
             if not pesel.isnumeric():
                 is_ok = False
             if is_ok:
-                return render(request, "base.html", {})
+                return redirect("/base/")
             return render(request, "client_registration.html", {'form': form})
     else:
         form = MyForm()
