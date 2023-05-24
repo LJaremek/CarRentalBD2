@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-lg4dy#h+d#%y5=iw!+jy0j=r#6#^&rg)(u!04-(qbbatj6-x%6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0", "20.56.50.73"]
 
 
 # Application definition
@@ -78,7 +78,14 @@ WSGI_APPLICATION = "carrentalbd2.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": BASE_DIR / "db.sqlite3"}
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres_db",
+        "USER": "admin1",
+        "PASSWORD": "haslo1",
+        "HOST": "localhost",
+        "PORT": "",
+    }
 }
 
 
