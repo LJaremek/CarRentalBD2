@@ -87,10 +87,10 @@ $$
 LANGUAGE plpgsql;
 
 
------------------
--- REJESTRACJA --
------------------
-CREATE OR REPLACE FUNCTION validate_input_data(
+--------------------------
+-- REJESTRACJA CZLOWIEK --
+--------------------------
+CREATE OR REPLACE FUNCTION validate_input_data_person(
     in_username TEXT,
     in_email TEXT,
     in_password TEXT,
@@ -137,6 +137,95 @@ BEGIN
 
     -- Sprawdzenie poprawności numeru PESEL
     IF in_pesel IS NULL OR in_pesel = '' OR NOT validate_pesel(in_pesel) THEN
+        is_valid := FALSE;
+    END IF;
+
+    RETURN is_valid;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+---------
+-- NIP --
+---------
+CREATE OR REPLACE FUNCTION validate_nip(nip_input TEXT) RETURNS BOOLEAN AS
+$$
+DECLARE
+  nip_pattern CONSTANT TEXT := '^\d{10}$';
+  nip_sum INTEGER;
+  i INTEGER;
+BEGIN
+  IF nip_input ~ nip_pattern THEN
+    nip_sum := 0;
+    
+    FOR i IN 1..9 LOOP
+      nip_sum := nip_sum + CAST(SUBSTRING(nip_input, i, 1) AS INTEGER) * (10 - i);
+    END LOOP;
+    
+    nip_sum := nip_sum % 11;
+    nip_sum := nip_sum % 10;
+    
+    RETURN nip_sum = CAST(SUBSTRING(nip_input, 10, 1) AS INTEGER);
+  END IF;
+  
+  RETURN FALSE;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+
+-----------------------
+-- REJESTRACJA FIRMA --
+-----------------------
+CREATE OR REPLACE FUNCTION validate_input_data_company(
+    in_username TEXT,
+    in_email TEXT,
+    in_password TEXT,
+    in_repeated_password TEXT,
+    in_phone TEXT,
+    in_nip TEXT,
+    in_name TEXT,
+    in_sector TEXT
+)
+RETURNS BOOLEAN AS
+$$
+DECLARE
+    is_valid BOOLEAN := TRUE;
+BEGIN
+    -- Sprawdzenie poprawności nazwy użytkownika
+    IF in_username IS NULL OR in_username = '' THEN
+        is_valid := FALSE;
+    END IF;
+
+    -- Sprawdzenie poprawności imienia
+    IF in_name IS NULL OR in_name = '' THEN
+        is_valid := FALSE;
+    END IF;
+
+    -- Sprawdzenie poprawności nazwiska
+    IF in_sector IS NULL OR in_sector = '' THEN
+        is_valid := FALSE;
+    END IF;
+
+    -- Sprawdzenie poprawności adresu e-mail
+    IF in_email IS NULL OR in_email = '' OR NOT validate_email(in_email) THEN
+        is_valid := FALSE;
+    END IF;
+
+    -- Sprawdzenie poprawności hasła i powtórzonego hasła
+    IF in_password IS NULL OR in_password = '' OR in_password <> in_repeated_password THEN
+        is_valid := FALSE;
+    END IF;
+
+    -- Sprawdzenie poprawności numeru telefonu
+    IF in_phone IS NULL OR in_phone = '' OR NOT validate_phone_number(in_phone) THEN
+        is_valid := FALSE;
+    END IF;
+
+    -- Sprawdzenie poprawności numeru NIP
+    IF in_nip IS NULL OR in_nip = '' OR NOT validate_nip(in_nip) THEN
         is_valid := FALSE;
     END IF;
 
