@@ -11,7 +11,7 @@ def log_screen_view(request):
     return render(request, "base.html", {"text": text_value})
 
 
-def registration(request):
+def registration_person(request):
     if request.method == 'POST':
         form = MyForm(request.POST)
         if form.is_valid():

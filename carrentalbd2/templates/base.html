@@ -59,8 +59,21 @@ img.avatar {
     max-width: 250px;
     border: none;
     cursor: pointer;
-    top: 50%; /* Przesuwamy przycisk na środek pionowo */
+    position: fixed;
+    top: 5%; /* Przesuwamy przycisk na środek pionowo */
     right: 0; /* Przesuwamy przycisk na prawo */
+  }
+
+  .cancelbtnn {
+    padding: 10px 18px;
+    background-color: #04AA6D;
+    color: white;
+    max-width: 250px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 5%; /* Przesuwamy przycisk na środek pionowo */
+    right: 20%; /* Przesuwamy przycisk na prawo */
   }
 
 .container {
@@ -92,15 +105,22 @@ h1 {
 <body>
 <div class="container">
     <div class="header">
-        <h1>Jaremek's Cars</h1>
-        <button onclick="redirectToRegisterSite()" class="cancelbtn">Create account</button>
+        <h1>Car rental</h1>
+        <button onclick="redirectToRegisterSite()" class="cancelbtn">Create account for person</button>
         <script>
             function redirectToRegisterSite() {
-              window.location.href = "/registration/";
+              window.location.href = "/registration_person/";
+            }
+        </script>
+        <button onclick="redirectToRegisterSite()" class="cancelbtnn">Create account for company</button>
+        <script>
+            function redirectToRegisterSite() {
+              window.location.href = "/registration_person/";
             }
         </script>
     </div>
 </div>
+
 
 
 <form action="{% url 'check_log' %}" method="post">
