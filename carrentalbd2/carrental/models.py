@@ -11,13 +11,15 @@ CAR_STATUS = (
 
 RENTAL_STATUS = (("finished", "Finished"), ("ongoing", "Ongoing"), ("booked", "Booked"))
 
-
 class Client(models.Model):
     login = models.CharField(max_length=50, unique=True)
     email = models.CharField(max_length=50, unique=True)
     password = models.CharField(max_length=50, null=False)  # to do form, hash
     phone = models.CharField(max_length=10, unique=True, null=True)
     country = models.CharField(max_length=50, null=True)
+
+    def __str__(self) -> str:
+        return self.email
 
 
 class Person(Client):
@@ -28,6 +30,10 @@ class Person(Client):
         Client, on_delete=models.CASCADE, related_name="children_person", default=None
     )
 
+    def __str__(self) -> str:
+        return self.first_name + " " + self.second_name
+
+
 
 class Company(Client):
     nip = models.CharField(max_length=50, null=False, unique=True)
@@ -36,6 +42,9 @@ class Company(Client):
     parent = models.ForeignKey(
         Client, on_delete=models.CASCADE, related_name="children_company", default=None
     )
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Brand(models.Model):
@@ -110,7 +119,8 @@ class Report(models.Model):
 
 class RepairWorkshop(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True)
-    telephone = models.CharField(max_length=15, null=True, unique=True)
+    telephone = models.CharField(max_length=50, null=True, unique=True)
+
     address = models.CharField(max_length=50, null=False)
 
 

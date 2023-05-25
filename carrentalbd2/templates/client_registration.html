@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#pesel {
+  margin-top: 10px;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+img.avatar {
+  width: 15%;
+}
+
+.header {
+    display: flex;
+    align-items: center; /* Wyśrodkowujemy zawartość w pionie */
+    justify-content: space-between; /* Rozmieszczamy elementy na przeciwnych krańcach */
+  }
+
+.right-button {
+    text-align: right;
+    margin-top: 10px;
+  }
+
+  .cancelbtn {
+    padding: 10px 18px;
+    background-color: #04AA6D;
+    color: white;
+    max-width: 250px;
+    border: none;
+    cursor: pointer;
+    top: 50%; /* Przesuwamy przycisk na środek pionowo */
+    right: 0; /* Przesuwamy przycisk na prawo */
+  }
+
+.container {
+  padding: 16px;
+  position: relative;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+span.psw-repeat {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  span.psw-repeat {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Client registration</h1>
+    </div>
+</div>
+
+
+<form action="{% url 'registration' %}" method="post">
+  {% csrf_token %}
+  
+  <div class="imgcontainer">
+    <img src="{% static 'images/key.png' %}" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="{{ form.username.id_for_label }}"><b>Username</b></label>
+    {{ form.username }}
+    <label for="{{ form.email.id_for_label }}"><b>Email</b></label>
+    {{ form.email }}
+    <label for="{{ form.password.id_for_label }}"><b>Password</b></label>
+    {{ form.password }}
+    <label for="{{ form.repeated_password.id_for_label }}"><b>Repeat password</b></label>
+    {{ form.repeated_password }}
+    <label for="{{ form.phone.id_for_label }}"><b>Phone</b></label>
+    {{ form.phone }}
+    <label for="{{ form.country.id_for_label }}"><b>Country</b></label>
+    {{ form.country }}
+    <br><br>
+    <label for="{{ form.pesel.id_for_label }}"><b>PESEL</b></label>
+    {{ form.pesel }}
+    <label for="{{ form.first_name.id_for_label }}"><b>First name</b></label>
+    {{ form.first_name }}
+    <label for="{{ form.second_name.id_for_label }}"><b>Second name</b></label>
+    {{ form.second_name }}
+    <button type="submit">Register</button>
+  </div>
+
+
+</form>
+
+
+</body>
+</html>

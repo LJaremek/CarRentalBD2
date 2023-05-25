@@ -1,0 +1,28 @@
+2023-05-24 19:02:32.896 CEST [3041] LOG:  starting PostgreSQL 12.9 on x86_64-conda-linux-gnu, compiled by x86_64-conda-linux-gnu-cc (Anaconda gcc) 11.2.0, 64-bit
+2023-05-24 19:02:32.896 CEST [3041] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-05-24 19:02:32.900 CEST [3041] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-05-24 19:02:32.909 CEST [3042] LOG:  database system was shut down at 2023-05-24 19:02:25 CEST
+2023-05-24 19:02:32.911 CEST [3041] LOG:  database system is ready to accept connections
+2023-05-24 19:03:06.207 CEST [3170] FATAL:  role "bejzak" does not exist
+2023-05-24 19:03:10.880 CEST [3205] FATAL:  role "bejzak" does not exist
+2023-05-24 19:05:09.777 CEST [3411] LOG:  starting PostgreSQL 12.9 on x86_64-conda-linux-gnu, compiled by x86_64-conda-linux-gnu-cc (Anaconda gcc) 11.2.0, 64-bit
+2023-05-24 19:05:09.777 CEST [3411] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-05-24 19:05:09.781 CEST [3411] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-05-24 19:05:09.790 CEST [3412] LOG:  database system was interrupted; last known up at 2023-05-24 19:02:49 CEST
+2023-05-24 19:05:10.093 CEST [3412] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-05-24 19:05:10.096 CEST [3412] LOG:  redo starts at 0/15CE598
+2023-05-24 19:05:10.101 CEST [3412] LOG:  invalid record length at 0/16D36A0: wanted 24, got 0
+2023-05-24 19:05:10.101 CEST [3412] LOG:  redo done at 0/16D3668
+2023-05-24 19:05:10.169 CEST [3411] LOG:  database system is ready to accept connections
+2023-05-25 12:08:45.180 CEST [751] LOG:  starting PostgreSQL 12.9 on x86_64-conda-linux-gnu, compiled by x86_64-conda-linux-gnu-cc (Anaconda gcc) 11.2.0, 64-bit
+2023-05-25 12:08:45.181 CEST [751] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-05-25 12:08:45.184 CEST [751] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-05-25 12:08:45.194 CEST [752] LOG:  database system was interrupted; last known up at 2023-05-25 01:00:22 CEST
+2023-05-25 12:08:45.499 CEST [752] LOG:  database system was not properly shut down; automatic recovery in progress
+2023-05-25 12:08:45.502 CEST [752] LOG:  redo starts at 0/172D1D0
+2023-05-25 12:08:45.502 CEST [752] LOG:  invalid record length at 0/172D2B8: wanted 24, got 0
+2023-05-25 12:08:45.502 CEST [752] LOG:  redo done at 0/172D280
+2023-05-25 12:08:45.517 CEST [751] LOG:  database system is ready to accept connections
+2023-05-25 12:20:51.444 CEST [2083] ERROR:  null value in column "parent_id" violates not-null constraint
+2023-05-25 12:20:51.444 CEST [2083] DETAIL:  Failing row contains (9, 123, Blazej, Ejzak, null).
+2023-05-25 12:20:51.444 CEST [2083] STATEMENT:  INSERT INTO "carrental_person" ("client_ptr_id", "pesel", "first_name", "second_name", "parent_id") VALUES (9, '123', 'Blazej', 'Ejzak', NULL)
