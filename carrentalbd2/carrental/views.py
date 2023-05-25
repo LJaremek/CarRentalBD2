@@ -86,10 +86,10 @@ def registration_company(request):
                     phone=phone,
                     country=country,
                 )
-                person = Company.objects.create(
+                comapny = Company.objects.create(
                     nip=nip, name=name, sector=sector, parent=client
                 )
-                person.save()
+                comapny.save()
                 return redirect("/base/?text={}".format("Successful registration"))
             return render(request, "company_registration.html", {"form": form})
     else:
