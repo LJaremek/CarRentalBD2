@@ -1,29 +1,35 @@
 from django.shortcuts import render, redirect
 from .forms import MyForm
+from django.db import connection
+from django.core.paginator import Paginator
 from carrental.models import Client
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as log
 from .models import Person
 
 # Create your views here.
 
+
 def log_screen_view(request):
-    text_value = request.GET.get('text', '')
+    text_value = request.GET.get("text", "")
     return render(request, "base.html", {"text": text_value})
 
 
 def registration(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = MyForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            repeated_password = form.cleaned_data['repeated_password']
-            phone = form.cleaned_data['phone']
-            country = form.cleaned_data['country']
-            pesel = form.cleaned_data['pesel']
-            first_name = form.cleaned_data['first_name']
-            second_name = form.cleaned_data['second_name']
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            repeated_password = form.cleaned_data["repeated_password"]
+            phone = form.cleaned_data["phone"]
+            country = form.cleaned_data["country"]
+            pesel = form.cleaned_data["pesel"]
+            first_name = form.cleaned_data["first_name"]
+            second_name = form.cleaned_data["second_name"]
             print(country)
             # Process the form data or save it to the database
             is_ok = True
@@ -35,24 +41,37 @@ def registration(request):
                 is_ok = False
             if is_ok:
                 client = Client.objects.create(
-                    login=username, 
-                    email=email, 
+                    login=username,
+                    email=email,
                     password=password,
                     phone=phone,
-                    country=country
+                    country=country,
                 )
                 person = Person.objects.create(
                     pesel=pesel,
                     first_name=first_name,
                     second_name=second_name,
-                    parent=client
+                    parent=client,
                 )
                 person.save()
-                return redirect('/base/?text={}'.format("Successful registration"))
-            return render(request, "client_registration.html", {'form': form})
+
+                # temp fix to annoying db bug where there would be an empty client created
+                query1 = "UPDATE carrental_person SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id"
+                query2 = "DELETE FROM carrental_client WHERE login=''"
+                with connection.cursor() as cursor:
+                    cursor.execute(query1)
+                    cursor.execute(query2)
+
+                # Create Django user
+                print(username, email, password)
+                user = User.objects.create_user(username, email, password)
+                user.save()
+
+                return redirect("/base/?text={}".format("Successful registration"))
+            return render(request, "client_registration.html", {"form": form})
     else:
         form = MyForm()
-    return render(request, "client_registration.html", {'form': form})
+    return render(request, "client_registration.html", {"form": form})
 
 
 def check_log(request):
@@ -60,12 +79,36 @@ def check_log(request):
         login = request.POST.get("uname")
         password = request.POST.get("psw")
         try:
+            user = authenticate(request, username=login, password=password)
+            if user is not None:
+                log(request, user)
+            else:
+                return render(request, "base.html", {"text": "login failed"})
             client = Client.objects.get(login=login)
         except Exception:
-            return render(request, "base.html", {"text": "Wrong log data"})
-        if password == client.password:
+            return render(request, "base.html", {"text": "Wrong login"})
+        if password != client.password:
+            return render(request, "base.html", {"text": "Wrong password"})
         # if hash(password) == client.password
-            context = {"client": client}
-            return render(request, "main_window.html", context)
-        else:
-            return render(request, "base.html", {"text": "Wrong log data"})
+    query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        data = cursor.fetchall()
+    cars_list = [
+        {
+            "model": car[1],
+            "seats_number": car[2],
+            "doors_number": car[3],
+            "status": car[0],
+            "date_produced": car[4],
+        }
+        for car in data
+    ]
+    p = Paginator(cars_list, 10)
+    page_number = request.GET.get("page")
+    page_obj = p.get_page(page_number)
+    for el in page_obj:
+        print(el)
+
+    context = {"page_obj": page_obj}
+    return render(request, "main_window.html", context)
