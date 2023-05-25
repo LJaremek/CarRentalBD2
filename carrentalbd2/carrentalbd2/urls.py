@@ -19,12 +19,14 @@ from django.urls import path
 from carrental.views import (
     log_screen_view,
     check_log,
-    registration
+    registration_person,
+    registration_company,
 )
 
 urlpatterns = [
-                path("admin/", admin.site.urls),
-                path("base/", log_screen_view),
-                path("registration/", registration, name='registration'),
-                path("check_log/", check_log, name="check_log")
-            ]
+    path("admin/", admin.site.urls),
+    path("base/", log_screen_view),
+    path("registration_person/", registration_person, name="registration_person"),
+    path("registration_company/", registration_company, name="registration_company"),
+    path("check_log/", check_log, name="check_log"),
+]
