@@ -90,24 +90,23 @@ h1 {
 </style>
 </head>
 <body>
-
 <div class="container">
     <div class="header">
         <h1>Jaremek's Cars</h1>
         <button onclick="redirectToRegisterSite()" class="cancelbtn">Create account</button>
         <script>
             function redirectToRegisterSite() {
-              window.location.href = "/base/registration/";
+              window.location.href = "/registration/";
             }
         </script>
     </div>
 </div>
 
 
-<form action="{% url 'chech_log' %}" method="post">
+<form action="{% url 'check_log' %}" method="post">
   {% csrf_token %}
-  {%if data_error %}
-  <h1>Błędne dane logowania</h1>
+  {%if text %}
+  <h1>{{ text }}</h1>
   {% endif %}
 
   <div class="imgcontainer">
@@ -123,9 +122,6 @@ h1 {
 
     <button type="submit">Login</button>
   </div>
-
-
-</form>
 
 </body>
 </html>

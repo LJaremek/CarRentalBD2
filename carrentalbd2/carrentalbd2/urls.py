@@ -25,5 +25,6 @@ from carrental.views import (
 urlpatterns = [
                 path("admin/", admin.site.urls),
                 path("base/", log_screen_view),
-                path("base/registration/", registration, name='registration'),
+                path("registration/", registration, name='registration'),
+                path("check_log", check_log, name="check_log")
             ]

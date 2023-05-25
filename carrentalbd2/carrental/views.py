@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import MyForm
 from carrental.models import Client
+from django.http import HttpResponse
 
 # Create your views here.
 
 def log_screen_view(request):
-    return render(request, "base.html", {"data_error": False})
+    text_value = request.GET.get('text', '')
+    return render(request, "base.html", {"text": text_value})
 
 
 def registration(request):
@@ -30,7 +32,7 @@ def registration(request):
             if not pesel.isnumeric():
                 is_ok = False
             if is_ok:
-                return redirect("/base/")
+                return redirect('/base/?text={}'.format("Successful registration"))
             return render(request, "client_registration.html", {'form': form})
     else:
         form = MyForm()
@@ -44,10 +46,10 @@ def check_log(request):
         try:
             client = Client.objects.get(login=login)
         except Exception:
-            return render(request, "base.html", {"data_error": True})
+            return render(request, "base.html", {"text": "Wrong log data"})
         if password == client.password:
         # if hash(password) == client.password
             context = {"client": client}
             return render(request, "main_window.html", context)
         else:
-            return render(request, "base.html", {"data_error": True})
+            return render(request, "base.html", {"text": "Wrong log data"})
