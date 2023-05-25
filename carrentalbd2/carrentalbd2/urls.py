@@ -16,13 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from carrental.views import log_screen_view, check_log, registration
+from carrental.views import log_screen_view, check_log
 from django.contrib.auth import views as auth_views
+from carrental.views import (
+    log_screen_view,
+    check_log,
+    registration_person,
+    registration_company,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("base/", log_screen_view),
-    path("registration/", registration, name="registration"),
     path("check_log/", check_log, name="check_log"),
-    path("logout_user/", auth_views.LogoutView.as_view(template_name="logout_user.html"), name="logout_user")
+    path("logout_user/", auth_views.LogoutView.as_view(template_name="logout_user.html"), name="logout_user"),
+    path("registration_person/", registration_person, name="registration_person"),
+    path("registration_company/", registration_company, name="registration_company"),
 ]

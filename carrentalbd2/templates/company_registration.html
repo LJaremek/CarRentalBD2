@@ -100,7 +100,7 @@ span.psw-repeat {
 
 <div class="container">
     <div class="header">
-        <h1>Person registration</h1>
+        <h1>Company registration</h1>
     </div>
 </div>
 
@@ -126,11 +126,11 @@ span.psw-repeat {
     <label for="{{ form.country.id_for_label }}"><b>Country</b></label>
     {{ form.country }}
     <br><br>
-    <label for="{{ form.pesel.id_for_label }}"><b>PESEL</b></label>
+    <label for="{{ form.nip.id_for_label }}"><b>NIP</b></label>
     {{ form.pesel }}
-    <label for="{{ form.first_name.id_for_label }}"><b>First name</b></label>
+    <label for="{{ form.name.id_for_label }}"><b>Name</b></label>
     {{ form.first_name }}
-    <label for="{{ form.second_name.id_for_label }}"><b>Second name</b></label>
+    <label for="{{ form.sector.id_for_label }}"><b>Sector</b></label>
     {{ form.second_name }}
     <button type="submit">Register</button>
   </div>
