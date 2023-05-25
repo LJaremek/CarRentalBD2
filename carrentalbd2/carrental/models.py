@@ -11,6 +11,7 @@ CAR_STATUS = (
 
 RENTAL_STATUS = (("finished", "Finished"), ("ongoing", "Ongoing"), ("booked", "Booked"))
 
+
 class Client(models.Model):
     login = models.CharField(max_length=50, unique=True)
     email = models.CharField(max_length=50, unique=True)
@@ -32,7 +33,6 @@ class Person(Client):
 
     def __str__(self) -> str:
         return self.first_name + " " + self.second_name
-
 
 
 class Company(Client):
