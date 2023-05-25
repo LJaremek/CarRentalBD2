@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import MyForm
 from carrental.models import Client
 from django.http import HttpResponse
+from .models import Person
 
 # Create your views here.
 
@@ -23,6 +24,7 @@ def registration(request):
             pesel = form.cleaned_data['pesel']
             first_name = form.cleaned_data['first_name']
             second_name = form.cleaned_data['second_name']
+            print(country)
             # Process the form data or save it to the database
             is_ok = True
             if password != repeated_password:
@@ -32,6 +34,20 @@ def registration(request):
             if not pesel.isnumeric():
                 is_ok = False
             if is_ok:
+                client = Client.objects.create(
+                    login=username, 
+                    email=email, 
+                    password=password,
+                    phone=phone,
+                    country=country
+                )
+                person = Person.objects.create(
+                    pesel=pesel,
+                    first_name=first_name,
+                    second_name=second_name,
+                    parent=client
+                )
+                person.save()
                 return redirect('/base/?text={}'.format("Successful registration"))
             return render(request, "client_registration.html", {'form': form})
     else:
