@@ -38,7 +38,6 @@ def registration_person(request):
             second_name = form.cleaned_data["second_name"]
             print(country)
             # Process the form data or save it to the database
-            is_ok = True
             try:
                 with connection.cursor() as cursor:
                     cursor.callproc('validate_input_data_person', [
@@ -56,33 +55,31 @@ def registration_person(request):
                     cursor.callproc('validate_phone_number', [phone])
                     cursor.callproc('validate_email', [email])
             except:
-                is_ok = False
-            if is_ok:
-                client = Client.objects.create(
-                    login=username,
-                    email=email,
-                    password=password,
-                    phone=phone,
-                    country=country,
-                )
-                client.save()
-                person = Person.objects.create(
-                    pesel=pesel,
-                    first_name=first_name,
-                    second_name=second_name,
-                    parent=client,
-                )
-                person.save()
-                # temp fix to annoying db bug where there would be an empty client created
-                with connection.cursor() as cursor:
-                    cursor.execute('CALL fix_bug_client_empty_record()')
-                # Create Django user
-                print(username, email, password)
-                user = User.objects.create_user(username, email, password)
-                user.save()
-
-                return redirect("/base/?text={}".format("Successful registration"))
-            return redirect("/base/?text={}".format("Unuccessful registration"))
+                return redirect("/base/?text={}".format("Unuccessful registration"))
+            client = Client.objects.create(
+                login=username,
+                email=email,
+                password=password,
+                phone=phone,
+                country=country,
+            )
+            client.save()
+            person = Person.objects.create(
+                pesel=pesel,
+                first_name=first_name,
+                second_name=second_name,
+                parent=client,
+            )
+            person.save()
+            # temp fix to annoying db bug where there would be an empty client created
+            with connection.cursor() as cursor:
+                cursor.execute('CALL fix_bug_client_empty_record()')
+            # Create Django user
+            print(username, email, password)
+            user = User.objects.create_user(username, email, password)
+            user.save()
+            return redirect("/base/?text={}".format("Successful registration"))
+            
     else:
         form = MyForm()
     return render(request, "client_registration.html", {"form": form})
@@ -133,7 +130,8 @@ def check_log(request):
     if request.POST:
         login = request.POST.get("uname")
         password = request.POST.get("psw")
-        
+        with connection.cursor() as cursor:
+            cursor.callproc('validate_email', [email])
         try:
             user = authenticate(request, username=login, password=password)
             if user is not None:
