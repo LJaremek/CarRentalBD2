@@ -55,14 +55,11 @@ def registration_person(request):
                 )
                 person.save()
 
-                query1 = "UPDATE carrental_person SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id"
-                query2 = "DELETE FROM carrental_client WHERE login=''"
+                # bad fix to bug where there would be empty clients created upon adding a person.
                 with connection.cursor() as cursor:
-                    cursor.execute(query1)
-                    cursor.execute(query2)
+                    cursor.execute("CALL remove_duplicate()")
 
                 # Create Django user
-                print(username, email, password)
                 user = User.objects.create_user(username, email, password)
                 user.save()
 
@@ -147,8 +144,8 @@ def check_log(request):
     p = Paginator(cars_list, 10)
     page_number = request.GET.get("page")
     page_obj = p.get_page(page_number)
-    for el in page_obj:
-        print(el)
+    # for el in page_obj:
+    #     print(el)
 
     context = {"page_obj": page_obj}
     return render(request, "main_window.html", context)
