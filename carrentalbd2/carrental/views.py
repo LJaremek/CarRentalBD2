@@ -82,7 +82,7 @@ def registration_person(request):
                 user.save()
 
                 return redirect("/base/?text={}".format("Successful registration"))
-            return render(request, "client_registration.html", {"form": form})
+            return redirect("/base/?text={}".format("Unuccessful registration"))
     else:
         form = MyForm()
     return render(request, "client_registration.html", {"form": form})
@@ -133,6 +133,7 @@ def check_log(request):
     if request.POST:
         login = request.POST.get("uname")
         password = request.POST.get("psw")
+        
         try:
             user = authenticate(request, username=login, password=password)
             if user is not None:
