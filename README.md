@@ -31,4 +31,8 @@ Po zalogowaniu do interfejsu administratora ukazują nam się utworzone obiekty.
 
 W interfejsie mamy możliwość generowania wybranych wykresów. Wyświetlamy je poprzez: Reports -> Wybrany_Raport -> add
 
+## Procedury
+
+Procedury znajdują się w [katalogu ./carrentalbd2/procedures/](./carrentalbd2/procedures/) 
+
 
