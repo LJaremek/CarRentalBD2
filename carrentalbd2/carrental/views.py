@@ -44,17 +44,7 @@ def registration_person(request):
             # Process the form data or save it to the database
             try:
                 with connection.cursor() as cursor:
-                    cursor.callproc('validate_input_data_person', [
-                        username,
-                        email,
-                        password,
-                        repeated_password,
-                        phone,
-                        pesel,
-                        first_name,
-                        second_name
-                        ]
-                    )
+                    cursor.callproc('validate_input_data_person', [ username, email, password, repeated_password, phone, pesel, first_name, second_name ])
                     client = Client.objects.create(
                         login=username,
                         email=email,
@@ -132,7 +122,6 @@ def check_log(request):
             print(result)
         if result is None:
             return redirect("/base/?text={}".format("Login failed"))
-        # if hash(password) == client.password
     query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
         cursor.execute(query)
