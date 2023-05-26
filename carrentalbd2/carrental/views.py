@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import MyForm
+from .forms import MyForm, MyCompanyForm
 from django.db import connection
 from django.core.paginator import Paginator
 from carrental.models import Client
@@ -86,7 +86,7 @@ def registration_person(request):
 
 def registration_company(request):
     if request.method == "POST":
-        form = MyForm(request.POST)
+        form = MyCompanyForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
             email = form.cleaned_data["email"]
@@ -121,7 +121,7 @@ def registration_company(request):
                 return redirect("/base/?text={}".format("Successful registration"))
             return render(request, "company_registration.html", {"form": form})
     else:
-        form = MyForm()
+        form = MyCompanyForm()
     return render(request, "company_registration.html", {"form": form})
 
 

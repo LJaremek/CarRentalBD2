@@ -107,7 +107,7 @@ span.psw-repeat {
 
 <form action="{% url 'registration_company' %}" method="post">
   {% csrf_token %}
-  
+
   <div class="imgcontainer">
     <img src="{% static 'images/key.png' %}" alt="Avatar" class="avatar">
   </div>
@@ -127,11 +127,11 @@ span.psw-repeat {
     {{ form.country }}
     <br><br>
     <label for="{{ form.nip.id_for_label }}"><b>NIP</b></label>
-    {{ form.pesel }}
+    {{ form.nip }}
     <label for="{{ form.name.id_for_label }}"><b>Name</b></label>
-    {{ form.first_name }}
+    {{ form.name }}
     <label for="{{ form.sector.id_for_label }}"><b>Sector</b></label>
-    {{ form.second_name }}
+    {{ form.sector }}
     <button type="submit">Register</button>
   </div>
 

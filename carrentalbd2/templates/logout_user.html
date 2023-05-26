@@ -110,37 +110,15 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>Jaremek's Cars</h1>
+      <h1>Logged out</h1>
       <button onclick="redirectToRegisterSite()" class="cancelbtn">Create account</button>
       <script>
         function redirectToRegisterSite() {
-          window.location.href = "/registration/";
+          window.location.href = "/registration_person/";
         }
       </script>
     </div>
+    <small><a href="{% url 'base' %}">Login again</a></small>
   </div>
-
-
-  <form action="{% url 'check_log' %}" method="post">
-    {% csrf_token %}
-    {%if text %}
-    <h1>{{ text }}</h1>
-    {% endif %}
-
-    <div class="imgcontainer">
-      <img src="{% static 'images/avatar.png' %}" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <button type="submit">Login</button>
-    </div>
-
 </body>
-
 </html>
