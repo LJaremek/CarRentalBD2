@@ -161,17 +161,17 @@ DECLARE
 BEGIN
   IF nip_input ~ nip_pattern THEN
     nip_sum := 0;
-    
+
     FOR i IN 1..9 LOOP
       nip_sum := nip_sum + CAST(SUBSTRING(nip_input, i, 1) AS INTEGER) * (10 - i);
     END LOOP;
-    
+
     nip_sum := nip_sum % 11;
     nip_sum := nip_sum % 10;
-    
+
     RETURN nip_sum = CAST(SUBSTRING(nip_input, 10, 1) AS INTEGER);
   END IF;
-  
+
   RETURN FALSE;
 END;
 $$
@@ -236,3 +236,28 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+
+----------------------------------
+-- Sprawdzenie danych logowania --
+----------------------------------
+CREATE OR REPLACE FUNCTION check_login_form(
+    login_param TEXT,
+    haslo_param TEXT
+    )
+RETURNS BOOLEAN AS $$
+DECLARE
+    czy_istnieje BOOLEAN;
+    poprawne_haslo BOOLEAN;
+BEGIN
+    -- Sprawdzenie, czy użytkownik istnieje
+    SELECT TRUE INTO czy_istnieje FROM uzytkownicy WHERE login = login_param;
+
+    IF czy_istnieje THEN
+        -- Porównanie hasła
+        SELECT (haslo = haslo_param) INTO poprawne_haslo FROM uzytkownicy WHERE login = login_param;
+    END IF;
+
+    RETURN poprawne_haslo;
+END;
+$$ LANGUAGE plpgsql;
