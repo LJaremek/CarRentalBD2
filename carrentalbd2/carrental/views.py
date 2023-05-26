@@ -55,7 +55,6 @@ def registration_person(request):
                 )
                 person.save()
 
-                # temp fix to annoying db bug where there would be an empty client created
                 query1 = "UPDATE carrental_person SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id"
                 query2 = "DELETE FROM carrental_client WHERE login=''"
                 with connection.cursor() as cursor:
