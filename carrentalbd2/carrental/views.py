@@ -79,7 +79,6 @@ def registration_person(request):
             user = User.objects.create_user(username, email, password)
             user.save()
             return redirect("/base/?text={}".format("Successful registration"))
-            
     else:
         form = MyForm()
     return render(request, "client_registration.html", {"form": form})
@@ -131,7 +130,7 @@ def check_log(request):
         login = request.POST.get("uname")
         password = request.POST.get("psw")
         with connection.cursor() as cursor:
-            cursor.callproc('validate_email', [email])
+            cursor.callproc('check_login', [login, password])
         try:
             user = authenticate(request, username=login, password=password)
             if user is not None:
