@@ -13,6 +13,12 @@ from .models import Person, Company
 
 
 def log_screen_view(request):
+    # loading procedures and fubctions to database
+    with open('procedures/registration.sql', 'r') as sql_file:
+        sql = sql_file.read()
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+    # parsing text to the base/ page
     text_value = request.GET.get("text", "")
     return render(request, "base.html", {"text": text_value})
 
@@ -33,11 +39,23 @@ def registration_person(request):
             print(country)
             # Process the form data or save it to the database
             is_ok = True
-            if password != repeated_password:
-                is_ok = False
-            if not phone.isnumeric():
-                is_ok = False
-            if not pesel.isnumeric():
+            try:
+                with connection.cursor() as cursor:
+                    cursor.callproc('validate_input_data_person', [
+                        username,
+                        email,
+                        password,
+                        repeated_password,
+                        phone,
+                        pesel,
+                        first_name,
+                        second_name
+                        ]
+                    )
+                    cursor.callproc('validate_pesel', [pesel])
+                    cursor.callproc('validate_phone_number', [phone])
+                    cursor.callproc('validate_email', [email])
+            except:
                 is_ok = False
             if is_ok:
                 client = Client.objects.create(
@@ -47,6 +65,7 @@ def registration_person(request):
                     phone=phone,
                     country=country,
                 )
+                client.save()
                 person = Person.objects.create(
                     pesel=pesel,
                     first_name=first_name,
@@ -55,9 +74,9 @@ def registration_person(request):
                 )
                 person.save()
 
-                # bad fix to bug where there would be empty clients created upon adding a person.
+                # temp fix to annoying db bug where there would be an empty client created
                 with connection.cursor() as cursor:
-                    cursor.execute("CALL remove_duplicate()")
+                    cursor.execute('CALL fix_bug_client_empty_record()')
 
                 # Create Django user
                 user = User.objects.create_user(username, email, password)

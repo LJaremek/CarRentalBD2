@@ -152,3 +152,16 @@ class CarFault(models.Model):
     report_id = models.ForeignKey(Report, null=False, on_delete=models.CASCADE)
     repair_id = models.ForeignKey(Repair, null=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=250, null=False)
+
+
+class CarInfoView(models.Model):
+    unique_id = models.CharField(max_length=255, primary_key=True)
+    car_status = models.CharField(choices=CAR_STATUS, default="free", max_length=15)
+    name = models.CharField(max_length=50, null=False, unique=False)
+    seats_number = models.PositiveIntegerField(null=False)
+    doors_number = models.PositiveIntegerField(null=False)
+    produced_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table='car_info_view'

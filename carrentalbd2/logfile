@@ -26,3 +26,7 @@
 2023-05-25 12:20:51.444 CEST [2083] ERROR:  null value in column "parent_id" violates not-null constraint
 2023-05-25 12:20:51.444 CEST [2083] DETAIL:  Failing row contains (9, 123, Blazej, Ejzak, null).
 2023-05-25 12:20:51.444 CEST [2083] STATEMENT:  INSERT INTO "carrental_person" ("client_ptr_id", "pesel", "first_name", "second_name", "parent_id") VALUES (9, '123', 'Blazej', 'Ejzak', NULL)
+2023-05-26 16:01:58.294 CEST [15482] FATAL:  lock file "postmaster.pid" already exists
+2023-05-26 16:01:58.294 CEST [15482] HINT:  Is another postmaster (PID 6217) running in data directory "/home/ejzakb/CarRentalBD2/carrentalbd2/database"?
+2023-05-26 16:02:08.226 CEST [15515] FATAL:  lock file "postmaster.pid" already exists
+2023-05-26 16:02:08.226 CEST [15515] HINT:  Is another postmaster (PID 6217) running in data directory "/home/ejzakb/CarRentalBD2/carrentalbd2/database"?

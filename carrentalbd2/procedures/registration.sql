@@ -41,12 +41,13 @@ BEGIN
             END IF;
         END IF;
     END IF;
-
+    IF valid = FALSE THEN
+        RAISE EXCEPTION 'Invalid pesel!' USING ERRCODE = 'P0004';
+    END IF;
     RETURN valid;
 END;
 $$
 LANGUAGE plpgsql;
-
 
 -------------
 -- TELEFON --
@@ -62,7 +63,7 @@ BEGIN
     IF phone_number ~ '^[+]?[0-9]+$' AND length(phone_number) >= 9 AND length(phone_number) <= 15 THEN
         RETURN TRUE;
     ELSE
-        RETURN FALSE;
+        RAISE EXCEPTION 'Invalid phone number!' USING ERRCODE = 'P0003';
     END IF;
 END;
 $$
@@ -80,7 +81,7 @@ BEGIN
     IF email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$' THEN
         RETURN TRUE;
     ELSE
-        RETURN FALSE;
+        RAISE EXCEPTION 'Invalid email!' USING ERRCODE = 'P0002';
     END IF;
 END;
 $$
@@ -139,7 +140,9 @@ BEGIN
     IF in_pesel IS NULL OR in_pesel = '' OR NOT validate_pesel(in_pesel) THEN
         is_valid := FALSE;
     END IF;
-
+    IF is_valid = FALSE THEN
+        RAISE EXCEPTION 'Invalid data!' USING ERRCODE = 'P0001';
+    END IF;
     RETURN is_valid;
 END;
 $$
@@ -158,17 +161,17 @@ DECLARE
 BEGIN
   IF nip_input ~ nip_pattern THEN
     nip_sum := 0;
-    
+
     FOR i IN 1..9 LOOP
       nip_sum := nip_sum + CAST(SUBSTRING(nip_input, i, 1) AS INTEGER) * (10 - i);
     END LOOP;
-    
+
     nip_sum := nip_sum % 11;
     nip_sum := nip_sum % 10;
-    
+
     RETURN nip_sum = CAST(SUBSTRING(nip_input, 10, 1) AS INTEGER);
   END IF;
-  
+    
   RETURN FALSE;
 END;
 $$
@@ -233,3 +236,40 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+
+----------------------------------
+-- Sprawdzenie danych logowania --
+----------------------------------
+CREATE OR REPLACE FUNCTION check_login_form(
+    login_param TEXT,
+    haslo_param TEXT
+    )
+RETURNS BOOLEAN AS $$
+DECLARE
+    czy_istnieje BOOLEAN;
+    poprawne_haslo BOOLEAN;
+BEGIN
+    -- Sprawdzenie, czy użytkownik istnieje
+    SELECT TRUE INTO czy_istnieje FROM uzytkownicy WHERE login = login_param;
+
+    IF czy_istnieje THEN
+        -- Porównanie hasła
+        SELECT (haslo = haslo_param) INTO poprawne_haslo FROM uzytkownicy WHERE login = login_param;
+    END IF;
+
+    RETURN poprawne_haslo;
+END;
+$$ LANGUAGE plpgsql;
+
+---------------------------------
+-- Empty Client record bug fix --
+---------------------------------
+
+CREATE OR REPLACE PROCEDURE fix_bug_client_empty_record()
+AS $$
+BEGIN
+    UPDATE carrental_person SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id;
+    DELETE FROM carrental_client WHERE login='';
+END;
+$$ LANGUAGE plpgsql;
