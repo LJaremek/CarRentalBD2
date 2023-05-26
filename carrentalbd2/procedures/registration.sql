@@ -171,7 +171,7 @@ BEGIN
 
     RETURN nip_sum = CAST(SUBSTRING(nip_input, 10, 1) AS INTEGER);
   END IF;
-    
+
   RETURN FALSE;
 END;
 $$
@@ -263,13 +263,25 @@ END;
 $$ LANGUAGE plpgsql;
 
 ---------------------------------
--- Empty Client record bug fix --
+-- Empty person record bug fix --
 ---------------------------------
 
-CREATE OR REPLACE PROCEDURE fix_bug_client_empty_record()
+CREATE OR REPLACE PROCEDURE fix_bug_person_empty_record()
 AS $$
 BEGIN
     UPDATE carrental_person SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id;
+    DELETE FROM carrental_client WHERE login='';
+END;
+$$ LANGUAGE plpgsql;
+
+
+----------------------------------
+-- Empty Company record bug fix --
+----------------------------------
+CREATE OR REPLACE PROCEDURE fix_bug_company_empty_record()
+AS $$
+BEGIN
+    UPDATE carrental_company SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id;
     DELETE FROM carrental_client WHERE login='';
 END;
 $$ LANGUAGE plpgsql;
