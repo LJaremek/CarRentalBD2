@@ -133,7 +133,7 @@ def check_log(request):
     if request.POST:
         login = request.POST.get("uname")
         password = request.POST.get("psw")
-        
+
         try:
             user = authenticate(request, username=login, password=password)
             if user is not None:
