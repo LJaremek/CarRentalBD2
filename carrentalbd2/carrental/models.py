@@ -15,7 +15,7 @@ RENTAL_STATUS = (("finished", "Finished"), ("ongoing", "Ongoing"), ("booked", "B
 class Client(models.Model):
     login = models.CharField(max_length=50, unique=True)
     email = models.CharField(max_length=50, unique=True)
-    password = models.CharField(max_length=50, null=False)  # to do form, hash
+    password = models.CharField(max_length=64, null=False)  # to do form, hash
     phone = models.CharField(max_length=10, unique=True, null=True)
     country = models.CharField(max_length=50, null=True)
 

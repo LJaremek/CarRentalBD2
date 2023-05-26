@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import MyForm
+from .forms import MyForm, MyCompanyForm
 from django.db import connection
 from django.core.paginator import Paginator
 from carrental.models import Client
@@ -60,11 +60,11 @@ def registration_person(request):
                         parent=client,
                     )
                     person.save()
+                    with connection.cursor() as cursor:
+                        cursor.execute('CALL fix_bug_person_empty_record()')
             except:
                 return redirect("/base/?text={}".format("Unuccessful registration"))
-            # temp fix to annoying db bug where there would be an empty client created
-            with connection.cursor() as cursor:
-                cursor.execute('CALL fix_bug_client_empty_record()')
+
             return redirect("/base/?text={}".format("Successful registration"))
     else:
         form = MyForm()
@@ -73,7 +73,7 @@ def registration_person(request):
 
 def registration_company(request):
     if request.method == "POST":
-        form = MyForm(request.POST)
+        form = MyCompanyForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
             email = form.cleaned_data["email"]
@@ -86,14 +86,20 @@ def registration_company(request):
             sector = form.cleaned_data["sector"]
             print(country)
             # Process the form data or save it to the database
-            is_ok = True
-            if password != repeated_password:
-                is_ok = False
-            if not phone.isnumeric():
-                is_ok = False
-            if not nip.isnumeric():
-                is_ok = False
-            if is_ok:
+            try:
+                with connection.cursor() as cursor:
+                    cursor.callproc('validate_input_data_company', [
+                        username,
+                        email,
+                        password,
+                        repeated_password,
+                        phone,
+                        nip,
+                        name,
+                        sector
+                        ]
+                    )
+
                 client = Client.objects.create(
                     login=username,
                     email=email,
@@ -101,14 +107,20 @@ def registration_company(request):
                     phone=phone,
                     country=country,
                 )
+                client.save()
                 comapny = Company.objects.create(
                     nip=nip, name=name, sector=sector, parent=client
                 )
                 comapny.save()
-                return redirect("/base/?text={}".format("Successful registration"))
-            return render(request, "company_registration.html", {"form": form})
+                with connection.cursor() as cursor:
+                    cursor.execute('CALL fix_bug_company_empty_record()')
+            except:
+                return redirect("/base/?text={}".format("Wrong data format"))
+
+
+            return redirect("/base/?text={}".format("Successful registration"))
     else:
-        form = MyForm()
+        form = MyCompanyForm()
     return render(request, "company_registration.html", {"form": form})
 
 

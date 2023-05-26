@@ -27,7 +27,7 @@ from carrental.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("base/", log_screen_view),
+    path("base/", log_screen_view, name="base"),
     path("check_log/", check_log, name="check_log"),
     path("logout_user/", auth_views.LogoutView.as_view(template_name="logout_user.html"), name="logout_user"),
     path("registration_person/", registration_person, name="registration_person"),

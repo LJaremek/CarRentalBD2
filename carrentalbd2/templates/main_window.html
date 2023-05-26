@@ -130,7 +130,10 @@
         <div class="header">
             {% if user.is_authenticated %}
                 <h1>Zalogowano jako: {{ user.username }}</h1>
-                <button class="cancelbtn" href="{% url 'logout_user' %}">Log out</button>
+                <form action="{% url 'logout_user' %}">
+                    {% csrf_token %}
+                    <button class="cancelbtn">Logout</button>
+                </form>
             {% else %}
                 <h1> ERROR </h1>
             {% endif %}
