@@ -125,11 +125,12 @@ def registration_company(request):
                     nip=nip, name=name, sector=sector, parent=client
                 )
                 comapny.save()
+                with connection.cursor() as cursor:
+                    cursor.execute('CALL fix_bug_company_empty_record()')
             except:
                 return redirect("/base/?text={}".format("Wrong data format"))
 
-            with connection.cursor() as cursor:
-                cursor.execute('CALL fix_bug_company_empty_record()')
+
             return redirect("/base/?text={}".format("Successful registration"))
     else:
         form = MyCompanyForm()
