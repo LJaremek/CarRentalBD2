@@ -18,6 +18,10 @@ def log_screen_view(request):
         sql = sql_file.read()
     with connection.cursor() as cursor:
         cursor.execute(sql)
+    with open('procedures/check_login.sql', 'r') as sql_file:
+        sql = sql_file.read()
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
     # parsing text to the base/ page
     text_value = request.GET.get("text", "")
     return render(request, "base.html", {"text": text_value})
@@ -51,33 +55,26 @@ def registration_person(request):
                         second_name
                         ]
                     )
-                    cursor.callproc('validate_pesel', [pesel])
-                    cursor.callproc('validate_phone_number', [phone])
-                    cursor.callproc('validate_email', [email])
+                    client = Client.objects.create(
+                        login=username,
+                        email=email,
+                        password=password,
+                        phone=phone,
+                        country=country,
+                    )
+                    client.save()
+                    person = Person.objects.create(
+                        pesel=pesel,
+                        first_name=first_name,
+                        second_name=second_name,
+                        parent=client,
+                    )
+                    person.save()
             except:
                 return redirect("/base/?text={}".format("Unuccessful registration"))
-            client = Client.objects.create(
-                login=username,
-                email=email,
-                password=password,
-                phone=phone,
-                country=country,
-            )
-            client.save()
-            person = Person.objects.create(
-                pesel=pesel,
-                first_name=first_name,
-                second_name=second_name,
-                parent=client,
-            )
-            person.save()
             # temp fix to annoying db bug where there would be an empty client created
             with connection.cursor() as cursor:
                 cursor.execute('CALL fix_bug_client_empty_record()')
-            # Create Django user
-            print(username, email, password)
-            user = User.objects.create_user(username, email, password)
-            user.save()
             return redirect("/base/?text={}".format("Successful registration"))
     else:
         form = MyForm()
@@ -127,21 +124,14 @@ def registration_company(request):
 
 def check_log(request):
     if request.POST:
-        login = request.POST.get("uname")
-        password = request.POST.get("psw")
+        login = str(request.POST.get("uname"))
+        password = str(request.POST.get("psw"))
         with connection.cursor() as cursor:
-            cursor.callproc('check_login', [login, password])
-        try:
-            user = authenticate(request, username=login, password=password)
-            if user is not None:
-                log(request, user)
-            else:
-                return render(request, "base.html", {"text": "login failed"})
-            client = Client.objects.get(login=login)
-        except Exception:
-            return render(request, "base.html", {"text": "Wrong login"})
-        if password != client.password:
-            return render(request, "base.html", {"text": "Wrong password"})
+            cursor.callproc("check_login", [login, password])
+            result = cursor.fetchone()[0]
+            print(result)
+        if result is None:
+            return redirect("/base/?text={}".format("Login failed"))
         # if hash(password) == client.password
     query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
