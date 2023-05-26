@@ -3,6 +3,7 @@ from .forms import MyForm
 from carrental.models import Client
 from django.http import HttpResponse
 from .models import Person, Company
+from django.db import connection
 
 # Create your views here.
 
@@ -27,14 +28,30 @@ def registration_person(request):
             second_name = form.cleaned_data["second_name"]
             print(country)
             # Process the form data or save it to the database
-            is_ok = True
-            if password != repeated_password:
-                is_ok = False
-            if not phone.isnumeric():
-                is_ok = False
-            if not pesel.isnumeric():
-                is_ok = False
-            if is_ok:
+
+            with connection.cursor() as cursor:
+                query = """
+                    SELECT validate_input_data_person(
+                        %s, %s, %s, %s, %s, %s, %s, %s
+                    )
+                """
+                cursor.execute(
+                    query,
+                    [
+                        username,
+                        email,
+                        password,
+                        repeated_password,
+                        phone,
+                        pesel,
+                        first_name,
+                        second_name,
+                    ],
+                )
+                result = cursor.fetchone()[0]
+            print("bbbbbbbbbbb")
+            if result:
+                print("aaaaaaaaaaaaaaa")
                 client = Client.objects.create(
                     login=username,
                     email=email,
@@ -101,13 +118,12 @@ def check_log(request):
     if request.POST:
         login = request.POST.get("uname")
         password = request.POST.get("psw")
-        try:
-            client = Client.objects.get(login=login)
-        except Exception:
+        with connection.cursor() as cursor:
+            query = "SELECT check_login(%s, %s)"
+            cursor.execute(query, [login, password])
+            result = cursor.fetchone()[0]
+        if not result:
             return render(request, "base.html", {"text": "Wrong log data"})
-        if password == client.password:
-            # if hash(password) == client.password
-            context = {"client": client}
-            return render(request, "main_window.html", context)
-        else:
-            return render(request, "base.html", {"text": "Wrong log data"})
+        client = Client.objects.get(login=login)
+        context = {"client": client}
+        return render(request, "main_window.html", context)
