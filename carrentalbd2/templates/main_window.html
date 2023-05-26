@@ -1,5 +1,178 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-    <h1>zalogowano jako:</h1>
-    {{client.email}}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+        a{
+            text-decoration: none;
+        }
+
+        p, li, a{
+            font-size: 14px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        form {
+            border: 3px solid #f1f1f1;
+        }
+
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            /* Wyśrodkowujemy zawartość w pionie */
+            justify-content: space-between;
+            /* Rozmieszczamy elementy na przeciwnych krańcach */
+        }
+
+        .right-button {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .cancelbtn {
+            padding: 10px 18px;
+            background-color: #04AA6D;
+            color: white;
+            max-width: 250px;
+            border: none;
+            cursor: pointer;
+            top: 50%;
+            /* Przesuwamy przycisk na środek pionowo */
+            right: 0;
+            /* Przesuwamy przycisk na prawo */
+        }
+
+        .container {
+            padding: 16px;
+            position: relative;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+
+        .three { width: 23.8%; }
+
+        .pagination{
+            padding: 30px 0;
+        }
+
+        .pagination ul{
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .pagination a{
+            display: inline-block;
+            padding: 10px 18px;
+            color: #222;
+        }
+        .p3 .is-active{
+        background-color: #2ecc71;
+        color: #fff;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            {% if user.is_authenticated %}
+                <h1>Zalogowano jako: {{ user.username }}</h1>
+                <button class="cancelbtn" href="{% url 'logout_user' %}">Log out</button>
+            {% else %}
+                <h1> ERROR </h1>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <form action="{% url 'check_log' %}" method="post">
+        {% csrf_token %}
+        {%if text %}
+        <h1>{{ text }}</h1>
+        {% endif %}
+
+        {% for car in page_obj %}
+        <p> {{ car.model }}, {{ car.status }}, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}
+        {% if car.produced %}
+        produced: {{ car.produced }}
+        {% endif %}
+        </p>
+        {% endfor %}
+
+        <div class="pagination p3">
+            <ul>
+                {% if page_obj.has_previous %}
+                    <a href="?page=1"><li>First</li></a>
+                    <a href="?page={{ page_obj.previous_page_number }}"><li>Previous</li></a>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <a class="is-active" href="?page={{ num }}"><li>{{ num }}</li></a>
+                    {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                        <a href="?page={{ num }}"><li>{{ num }}</li></a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"><li>Next</li></a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}"><li>Last</li></a>
+                {% endif %}
+            </ul>
+          </div>
+
+</body>
+
 </html>

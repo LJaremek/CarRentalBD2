@@ -13,3 +13,5 @@ carrentalbd2/main_key.pem
 carrentalbd2/carrentalbd2/settings.py
 
 carrentalbd2/database/
+
+*.pem
