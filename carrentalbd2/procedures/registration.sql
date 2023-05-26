@@ -41,12 +41,13 @@ BEGIN
             END IF;
         END IF;
     END IF;
-
+    IF valid = FALSE THEN
+        RAISE EXCEPTION 'Invalid pesel!' USING ERRCODE = 'P0004';
+    END IF;
     RETURN valid;
 END;
 $$
 LANGUAGE plpgsql;
-
 
 -------------
 -- TELEFON --
@@ -62,7 +63,7 @@ BEGIN
     IF phone_number ~ '^[+]?[0-9]+$' AND length(phone_number) >= 9 AND length(phone_number) <= 15 THEN
         RETURN TRUE;
     ELSE
-        RETURN FALSE;
+        RAISE EXCEPTION 'Invalid phone number!' USING ERRCODE = 'P0003';
     END IF;
 END;
 $$
@@ -80,7 +81,7 @@ BEGIN
     IF email ~ '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$' THEN
         RETURN TRUE;
     ELSE
-        RETURN FALSE;
+        RAISE EXCEPTION 'Invalid email!' USING ERRCODE = 'P0002';
     END IF;
 END;
 $$
@@ -139,7 +140,9 @@ BEGIN
     IF in_pesel IS NULL OR in_pesel = '' OR NOT validate_pesel(in_pesel) THEN
         is_valid := FALSE;
     END IF;
-
+    IF is_valid = FALSE THEN
+        RAISE EXCEPTION 'Invalid data!' USING ERRCODE = 'P0001';
+    END IF;
     RETURN is_valid;
 END;
 $$

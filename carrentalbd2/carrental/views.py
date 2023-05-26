@@ -13,6 +13,10 @@ from .models import Person, Company
 
 
 def log_screen_view(request):
+    with open('procedures/registration.sql', 'r') as sql_file:
+        sql = sql_file.read()
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
     text_value = request.GET.get("text", "")
     return render(request, "base.html", {"text": text_value})
 
@@ -32,6 +36,21 @@ def registration_person(request):
             second_name = form.cleaned_data["second_name"]
             print(country)
             # Process the form data or save it to the database
+            with connection.cursor() as cursor:
+                cursor.callproc('validate_input_data_person', [
+                    username,
+                    email,
+                    password,
+                    repeated_password,
+                    phone,
+                    pesel,
+                    first_name,
+                    second_name
+                    ]
+                )
+                cursor.callproc('validate_pesel', [pesel])
+                cursor.callproc('validate_phone_number', [phone])
+                cursor.callproc('validate_email', [email])
             is_ok = True
             if password != repeated_password:
                 is_ok = False
@@ -47,6 +66,7 @@ def registration_person(request):
                     phone=phone,
                     country=country,
                 )
+                client.save()
                 person = Person.objects.create(
                     pesel=pesel,
                     first_name=first_name,
@@ -54,7 +74,6 @@ def registration_person(request):
                     parent=client,
                 )
                 person.save()
-
                 # temp fix to annoying db bug where there would be an empty client created
                 query1 = "UPDATE carrental_person SET client_ptr_id=parent_id WHERE client_ptr_id != parent_id"
                 query2 = "DELETE FROM carrental_client WHERE login=''"

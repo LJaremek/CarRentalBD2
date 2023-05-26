@@ -139,7 +139,6 @@
 
 
     <form action="{% url 'check_log' %}" method="post">
-        {% csrf_token %}
         {%if text %}
         <h1>{{ text }}</h1>
         {% endif %}
