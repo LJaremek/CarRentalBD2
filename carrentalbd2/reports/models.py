@@ -1,10 +1,19 @@
 import io
 import urllib.parse
 import base64
+from typing import Callable
 from django.db import models
 from django_matplotlib import MatplotlibFigureField
 from django.contrib import admin
 from .figures import *
+
+
+def create_content(plotter: Callable, title: str):
+    chart = plotter()
+    extra_context = {}
+    extra_context["chart_url"] = convert_chart(chart)
+    extra_context["title"] = title
+    return extra_context
 
 
 def convert_chart(plot):
@@ -22,11 +31,9 @@ class BrandOriginAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         self.queryset = self.model.objects.filter()
-        chart = car_brands()
-        extra_context = {}
-        extra_context["chart_url"] = convert_chart(chart)
-        extra_context["title"] = "Number of brands by country of origin"
-
+        extra_context = create_content(
+            car_brands, "Number of brands by country of origin"
+        )
         return super().changelist_view(request, extra_context=extra_context)
 
 
@@ -39,10 +46,9 @@ class RepairRealizationAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         self.queryset = self.model.objects.filter()
-        chart = repair_realization()
-        extra_context = {}
-        extra_context["chart_url"] = convert_chart(chart)
-        extra_context["title"] = "Number of realized repairs by realizator"
+        extra_context = create_content(
+            repair_realization, "Number of realized repairs by realizator"
+        )
         return super().changelist_view(request, extra_context=extra_context)
 
 
@@ -54,11 +60,9 @@ class CarByBrandAdmin(admin.ModelAdmin):
     change_list_template = "chart.html"
 
     def changelist_view(self, request, extra_context=None):
-        self.queryset = self.model.objects.filter()
-        chart = car_by_brand()
-        extra_context = {}
-        extra_context["chart_url"] = convert_chart(chart)
-        extra_context["title"] = "Amount of possessed cars of each brand"
+        extra_context = create_content(
+            car_by_brand, "Amount of possessed cars of each brand"
+        )
         return super().changelist_view(request, extra_context=extra_context)
 
 
@@ -71,10 +75,9 @@ class DemandByCarModelAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         self.queryset = self.model.objects.filter()
-        chart = demand_by_car_model()
-        extra_context = {}
-        extra_context["chart_url"] = convert_chart(chart)
-        extra_context["title"] = "Amount of rent by car model"
+        extra_context = create_content(
+            demand_by_car_model, "Amount of rent by car model"
+        )
         return super().changelist_view(request, extra_context=extra_context)
 
 
@@ -87,10 +90,10 @@ class RepairCostsByCarModelAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         self.queryset = self.model.objects.filter()
-        chart = repair_costs_by_car_model()
-        extra_context = {}
-        extra_context["chart_url"] = convert_chart(chart)
-        extra_context["title"] = "Amount of repair and total cost of them /1000 by car model"
+        extra_context = create_content(
+            repair_costs_by_car_model,
+            "Amount of repair and total cost of them /1000 by car model",
+        )
         return super().changelist_view(request, extra_context=extra_context)
 
 
