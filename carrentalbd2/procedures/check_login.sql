@@ -9,7 +9,7 @@ BEGIN
   SELECT true INTO valid_user
   FROM carrental_client
   WHERE (login = login_input AND password = password_input);
-  
+
   RETURN valid_user;
 END;
 $$
