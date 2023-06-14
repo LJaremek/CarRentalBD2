@@ -4,7 +4,7 @@ import base64
 from django.db import models
 from django_matplotlib import MatplotlibFigureField
 from django.contrib import admin
-from .figures import car_brands, repair_realization, car_by_brand
+from .figures import *
 
 
 def convert_chart(plot):
@@ -64,3 +64,35 @@ class CarByBrandAdmin(admin.ModelAdmin):
 
 class CarByBrand(models.Model):
     figure = MatplotlibFigureField(figure="car_by_brand")
+
+
+class DemandByCarModelAdmin(admin.ModelAdmin):
+    change_list_template = "chart.html"
+
+    def changelist_view(self, request, extra_context=None):
+        self.queryset = self.model.objects.filter()
+        chart = demand_by_car_model()
+        extra_context = {}
+        extra_context["chart_url"] = convert_chart(chart)
+        extra_context["title"] = "Amount of rent by car model"
+        return super().changelist_view(request, extra_context=extra_context)
+
+
+class DemandByCarModel(models.Model):
+    figure = MatplotlibFigureField(figure="demand_by_car_model")
+
+
+class RepairCostsByCarModelAdmin(admin.ModelAdmin):
+    change_list_template = "chart.html"
+
+    def changelist_view(self, request, extra_context=None):
+        self.queryset = self.model.objects.filter()
+        chart = repair_costs_by_car_model()
+        extra_context = {}
+        extra_context["chart_url"] = convert_chart(chart)
+        extra_context["title"] = "Amount of repair and total cost of them /1000 by car model"
+        return super().changelist_view(request, extra_context=extra_context)
+
+
+class RepairCostsByCarModel(models.Model):
+    figure = MatplotlibFigureField(figure="repair_costs_by_car_model")
