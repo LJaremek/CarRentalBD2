@@ -11,6 +11,55 @@ from .models import Person, Company
 
 # Create your views here.
 
+def my_account(request):
+    # try person
+    username = request.POST.get("username")
+    my_user_data = None
+    query = ""
+    user_data_dict = {}
+    user_data = []
+    my_user_data = []
+    query = f"""\
+    SELECT c.country, c.email, c.login, c.phone, p.first_name, p.pesel, p.surname, c.id \
+    FROM carrental_client c JOIN carrental_person p ON c.id = p.parent_id \
+    WHERE c.login = '{username}'"""
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        user_data = cursor.fetchall()
+    if len(user_data) > 0:
+        my_user_data = user_data[0]
+        user_data_dict = {
+            "first_name" : my_user_data[4],
+            "pesel" : my_user_data[5],
+            "surname" : my_user_data[6]
+        }
+    else:
+        query = f"""\
+        SELECT c.id, c.country, c.email, c.login, c.phone, k.name, k.nip, k.sector \
+        FROM carrental_client c JOIN carrental_company k ON c.id = k.parent_id \
+        WHERE c.login = '{username}'
+        """
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            user_data = cursor.fetchall()
+        my_user_data = user_data[0]
+        user_data_dict = {
+            "name" : my_user_data[4],
+            "nip" : my_user_data[5],
+            "sector" : my_user_data[6]
+        }
+    user_data_dict["country"] = my_user_data[0]
+    user_data_dict["email"] = my_user_data[1]
+    user_data_dict["login"] = my_user_data[2]
+    user_data_dict["phone"] = my_user_data[3]
+
+    query = f"SELECT country, c.email, c.login, c.phone, k.name, k.nip, k.sector FROM client c JOIN company k ON c.id = k.id WHERE c.login = {username}"
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        user_data = cursor.fetchall()
+
+    return render(request, "my_account.html")
+
 
 def log_screen_view(request):
     # loading procedures and fubctions to database
@@ -138,10 +187,11 @@ def check_log(request):
 
 def main_window(request):
     login = str(request.GET.get("login"))
-    query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
-        cursor.execute(query)
-        data = cursor.fetchall()
+        with open('views/car_model_car.sql') as view:
+            query = view.read()
+            cursor.execute(query)
+            data = cursor.fetchall()
     cars_list = [
         {
             "model": car[1],
