@@ -1,0 +1,7 @@
+<!-- yourapp/yourmodel_changelist.html -->
+{% extends 'admin/change_list.html' %}
+
+{% block content %}
+    <!-- Display the chart image -->
+    <img src="data:image/png;base64,{{ chart_url }}" alt="Chart" style="width: 800px; height: 600px;">
+{% endblock %}

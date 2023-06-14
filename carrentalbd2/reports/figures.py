@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from carrental.models import Brand, Repair, Car, CarModel
+from carrental.models import Brand, Repair, Car
 from django.db.models import Count
 
 
@@ -15,7 +15,6 @@ def car_brands():
         numbers.append(oc["num_brands"])
     ax.bar(countires, numbers)
     ax.set_ylabel("amount")
-    ax.set_title("Number of brands by country of origin")
     ax.legend(title="Origin country")
     return fig
 
@@ -32,7 +31,6 @@ def repair_realization():
             numbers[0] += 1
     ax.bar(realizator, numbers)
     ax.set_ylabel("amount")
-    ax.set_title("Number of realized repairs by realizator")
     return fig
 
 
@@ -48,5 +46,4 @@ def car_by_brand():
         car_counts.append(brand_count["total_cars"])
     ax.bar(brand_names, car_counts)
     ax.set_ylabel("amount")
-    ax.set_title("Amount of possessed cars of each brand")
     return fig

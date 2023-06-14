@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import BrandOrigin, RepairRealization, CarByBrand
+from .models import *
 
-admin.site.register(BrandOrigin)
-admin.site.register(RepairRealization)
-admin.site.register(CarByBrand)
+
+admin.site.register(BrandOrigin, BrandOriginAdmin)
+admin.site.register(RepairRealization, RepairRealizationAdmin)
+admin.site.register(CarByBrand, CarByBrandAdmin)
