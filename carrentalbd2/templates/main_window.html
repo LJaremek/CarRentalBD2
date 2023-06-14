@@ -62,15 +62,28 @@
         }
 
         .cancelbtn {
-            padding: 10px 18px;
+            padding: 5px 5px;
             background-color: #04AA6D;
             color: white;
-            max-width: 250px;
+            max-width: 300px;
             border: none;
             cursor: pointer;
             top: 50%;
             /* Przesuwamy przycisk na środek pionowo */
             right: 0;
+            /* Przesuwamy przycisk na prawo */
+        }
+
+        .redbtn {
+            padding: 5px 5px;
+            background-color: #adabab;
+            color: white;
+            max-width: 300px;
+            border: none;
+            top: 50%;
+            /* Przesuwamy przycisk na środek pionowo */
+            right: 0;
+            pointer-events: none;
             /* Przesuwamy przycisk na prawo */
         }
 
@@ -128,27 +141,28 @@
 <body>
     <div class="container">
         <div class="header">
-            {% if user.is_authenticated %}
-                <h1>Zalogowano jako: {{ user.username }}</h1>
+            <h1>Zalogowano jako: {{ username }}</h1>
                 <form action="{% url 'logout_user' %}">
                     {% csrf_token %}
                     <button class="cancelbtn">Logout</button>
                 </form>
-            {% else %}
-                <h1> ERROR </h1>
-            {% endif %}
         </div>
     </div>
 
 
-    <form action="{% url 'check_log' %}" method="post">
+    <form action="{% url 'car_rent' %}" method="post">
         {% csrf_token %}
         {%if text %}
         <h1>{{ text }}</h1>
         {% endif %}
 
         {% for car in page_obj %}
-        <p> {{ car.model }}, {{ car.status }}, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}
+       <!-- <p> {{ car.model }}, {{ car.status }}, seats: {{ car.seats_number }}, doors: {{ car.doors_number }} -->
+            {% if car.status == "free" %}
+            <button class="cancelbtn">{{ car.model }}, AVAILABLE, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}</button>
+            {% else %}
+            <button type="button" class="redbtn">{{ car.model }}, UNAVAILABLE, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}</button>
+            {% endif %}
         {% if car.produced %}
         produced: {{ car.produced }}
         {% endif %}

@@ -1,4 +1,4 @@
-DROP FUNCTION check_login(character varying,character varying);
+--DROP FUNCTION check_login(character varying,character varying);
 CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
   RETURNS boolean AS
 $$

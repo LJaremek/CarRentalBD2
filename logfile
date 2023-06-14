@@ -1,0 +1,173 @@
+2023-06-14 15:30:13.692 CEST [985] LOG:  starting PostgreSQL 12.9 on x86_64-conda-linux-gnu, compiled by x86_64-conda-linux-gnu-cc (Anaconda gcc) 11.2.0, 64-bit
+2023-06-14 15:30:13.692 CEST [985] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2023-06-14 15:30:13.696 CEST [985] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2023-06-14 15:30:13.705 CEST [986] LOG:  database system was shut down at 2023-06-14 15:30:01 CEST
+2023-06-14 15:30:13.708 CEST [985] LOG:  database system is ready to accept connections
+2023-06-14 15:31:43.060 CEST [1352] FATAL:  role "admin1" does not exist
+2023-06-14 15:41:41.975 CEST [1908] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:41:41.975 CEST [1908] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:44:23.607 CEST [2085] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:44:23.607 CEST [2085] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:44:24.442 CEST [2092] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:44:24.442 CEST [2092] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:46:19.553 CEST [2307] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:46:19.553 CEST [2307] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:46:20.162 CEST [2309] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:46:20.162 CEST [2309] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:46:20.694 CEST [2310] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:46:20.694 CEST [2310] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:46:20.955 CEST [2322] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:46:20.955 CEST [2322] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:46:21.068 CEST [2323] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:46:21.068 CEST [2323] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 15:46:21.321 CEST [2324] ERROR:  function check_login(character varying, character varying) does not exist
+2023-06-14 15:46:21.321 CEST [2324] STATEMENT:  DROP FUNCTION check_login(character varying,character varying);
+	CREATE OR REPLACE FUNCTION check_login(login_input varchar, password_input varchar)
+	  RETURNS boolean AS
+	$$
+	DECLARE
+	  valid_user boolean := false;
+	BEGIN
+	  -- Check if the login and password match in the carrental_client table
+	  SELECT true INTO valid_user
+	  FROM carrental_client
+	  WHERE (login = login_input AND password = password_input);
+	  
+	  RETURN valid_user;
+	END;
+	$$
+	LANGUAGE plpgsql;
+	
+2023-06-14 16:57:18.581 CEST [5414] FATAL:  database "ejzakb" does not exist
+2023-06-14 17:01:13.829 CEST [5632] FATAL:  database "admin1" does not exist
+2023-06-14 17:01:21.810 CEST [5681] FATAL:  database "database" does not exist
+2023-06-14 17:06:19.106 CEST [6116] ERROR:  syntax error at or near "." at character 79
+2023-06-14 17:06:19.106 CEST [6116] STATEMENT:  SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id

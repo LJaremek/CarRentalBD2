@@ -114,7 +114,7 @@ def registration_company(request):
                 comapny.save()
                 with connection.cursor() as cursor:
                     cursor.execute('CALL fix_bug_company_empty_record()')
-            except:
+            except Exception:
                 return redirect("/base/?text={}".format("Wrong data format"))
 
 
@@ -134,7 +134,11 @@ def check_log(request):
             print(result)
         if result is None:
             return redirect("/base/?text={}".format("Login failed"))
-    query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
+    return redirect("/main_window/?login={}".format(login))
+
+def main_window(request):
+    login = str(request.GET.get("login"))
+    query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
         cursor.execute(query)
         data = cursor.fetchall()
@@ -145,6 +149,7 @@ def check_log(request):
             "doors_number": car[3],
             "status": car[0],
             "date_produced": car[4],
+            "id": car[5]
         }
         for car in data
     ]
@@ -153,6 +158,9 @@ def check_log(request):
     page_obj = p.get_page(page_number)
     for el in page_obj:
         print(el)
-
-    context = {"page_obj": page_obj}
+    context = {"page_obj": page_obj, "username": login}
     return render(request, "main_window.html", context)
+
+def car_rent(request):
+    car_id = str(request.GET.get("car_id"))
+    return render(request, "car_rent.html", {"text": id})
