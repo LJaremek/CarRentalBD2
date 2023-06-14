@@ -141,7 +141,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Zalogowano jako: {{ username }}</h1>
+            <h1>Zalogowano jako: {{ login }}</h1>
                 <form action="{% url 'logout_user' %}">
                     {% csrf_token %}
                     <button class="cancelbtn">Logout</button>
@@ -155,11 +155,15 @@
         {%if text %}
         <h1>{{ text }}</h1>
         {% endif %}
+        
+        {%if rent_status == "success" %}
+        <h1>Rent successful</h1>
+        {% endif %}
 
         {% for car in page_obj %}
        <!-- <p> {{ car.model }}, {{ car.status }}, seats: {{ car.seats_number }}, doors: {{ car.doors_number }} -->
             {% if car.status == "free" %}
-            <button class="cancelbtn">{{ car.model }}, AVAILABLE, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}</button>
+            <a href="{% url 'car_rent' %}?login={{ login }}&car_id={{ car.id }}" class="cancelbtn">{{ car.model }}, AVAILABLE, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}</a>
             {% else %}
             <button type="button" class="redbtn">{{ car.model }}, UNAVAILABLE, seats: {{ car.seats_number }}, doors: {{ car.doors_number }}</button>
             {% endif %}
@@ -172,20 +176,20 @@
         <div class="pagination p3">
             <ul>
                 {% if page_obj.has_previous %}
-                    <a href="?page=1"><li>First</li></a>
-                    <a href="?page={{ page_obj.previous_page_number }}"><li>Previous</li></a>
+                    <a href="?login={{ login }}&page=1"><li>First</li></a>
+                    <a href="?login={{ login }}&page={{ page_obj.previous_page_number }}"><li>Previous</li></a>
                 {% endif %}
                 {% for num in page_obj.paginator.page_range %}
                     {% if page_obj.number == num %}
-                        <a class="is-active" href="?page={{ num }}"><li>{{ num }}</li></a>
+                        <a class="is-active" href="?login={{ login }}&page={{ num }}"><li>{{ num }}</li></a>
                     {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
-                        <a href="?page={{ num }}"><li>{{ num }}</li></a>
+                        <a href="?login={{ login }}&page={{ num }}"><li>{{ num }}</li></a>
                     {% endif %}
                 {% endfor %}
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}"><li>Next</li></a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}"><li>Last</li></a>
+                    <a href="?login={{ login }}&page={{ page_obj.next_page_number }}"><li>Next</li></a>
+                    <a href="?login={{ login }}&page={{ page_obj.paginator.num_pages }}"><li>Last</li></a>
                 {% endif %}
             </ul>
           </div>

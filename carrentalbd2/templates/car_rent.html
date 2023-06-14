@@ -27,6 +27,7 @@
 
 
   .cancelbtn {
+    text-decoration: none;
     padding: 10px 18px;
     background-color: #04AA6D;
     color: white;
@@ -39,6 +40,7 @@
   }
 
   .cancelbtnn {
+    text-decoration: none;
     padding: 10px 18px;
     background-color: #04AA6D;
     color: white;
@@ -49,6 +51,17 @@
     top: 5%; /* Przesuwamy przycisk na środek pionowo */
     right: 20%; /* Przesuwamy przycisk na prawo */
   }
+  
+.submit {
+  text-decoration: none;
+  background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+}
 
 .container {
   padding: 16px;
@@ -125,41 +138,31 @@
   <div class="container">
     <div class="header">
         <h1>Car rental</h1>
-        <button onclick="redirectToRegisterPersonSite()" class="cancelbtn">Create account for person</button>
-        <script>
-            function redirectToRegisterPersonSite() {
-                window.location.href = "/registration_person/";
-            }
-        </script>
-        <button onclick="redirectToRegisterCompanySite()" class="cancelbtnn">Create account for company</button>
-        <script>
-            function redirectToRegisterCompanySite() {
-                window.location.href = "/registration_company/";
-            }
-        </script>
     </div>
 </div>
 
-<form action="{% url 'check_log' %}" method="post">
-    {% csrf_token %}
-    {%if text %}
-    <h1>{{ text }}</h1>
-    {% endif %}
-
-    <div class="imgcontainer">
-      <img src="{% static 'images/avatar.png' %}" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <button type="submit">Login</button>
-    </div>
-
+<div class="container">
+  <p> Car information: </p>
+    <ul>
+    <li>Car model:{{ car_info.model_name }}</li> 
+    <li>seats: {{ car_info.seats_number }}</li>
+    <li>doors: {{ car_info.doors_number }}</li> 
+    <li>trunk capacity: {{ car_info.trunk_capacity }}l</li>
+    <li>produced date: {{ car_info.produced_date }}</li> 
+    <li>brand name: {{ car_info.brand_name }}</li>
+    <li>country of origin: {{ car_info.country_of_origin }}</li>
+    <li>driving license required: {{ car_info.driving_license }}</li>
+    <li>additional license information: {{ car_info.license_desc }}</li>
+    <li>price per hour: {{ car_info.price_per_h }}PLN</li>
+    <li>price per km: {{ car_info.price_per_km }}PLN</li>  
+  </ul>
+  
+</div>
+<a href="{% url 'main_window' %}?login={{ login }}" class="cancelbtn">Go back</a>
+<form action="{% url 'main_window' %}?login={{ login }}&rent_status=success&car_id={{ car_id }}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="submit">Rent a car</button>
+</form>
 </body>
 
 </html>

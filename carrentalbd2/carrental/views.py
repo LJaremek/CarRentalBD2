@@ -7,7 +7,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as log
-from .models import Person, Company
+from .models import Person, Company, Rental, Car
+from django.utils import timezone
 
 # Create your views here.
 
@@ -138,6 +139,26 @@ def check_log(request):
 
 def main_window(request):
     login = str(request.GET.get("login"))
+    rent_status = str(request.GET.get("rent_status"))
+    if rent_status == "success":
+        ca_id = str(request.GET.get("car_id"))
+        query = f"SELECT id FROM carrental_client WHERE login = '{login}'"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
+            data = cursor.fetchall()
+        cl_id = data[0][0]
+        rental = Rental.objects.create(
+            client_id=Client.objects.get(id=cl_id),
+            car_id=Car.objects.get(id=ca_id),
+            station_id=None,
+            start_date=timezone.now(),
+            end_date=None,
+            rental_status="rented"
+        )
+        rental.save()
+        query = f"UPDATE carrental_car SET car_status = 'rented' where id = {ca_id}"
+        with connection.cursor() as cursor:
+            cursor.execute(query)
     query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
         cursor.execute(query)
@@ -156,11 +177,32 @@ def main_window(request):
     p = Paginator(cars_list, 10)
     page_number = request.GET.get("page")
     page_obj = p.get_page(page_number)
-    for el in page_obj:
-        print(el)
-    context = {"page_obj": page_obj, "username": login}
+    context = {"page_obj": page_obj, "login": login, "rent_status": rent_status}
     return render(request, "main_window.html", context)
 
 def car_rent(request):
+    # TODO
     car_id = str(request.GET.get("car_id"))
-    return render(request, "car_rent.html", {"text": id})
+    login = str(request.GET.get("login"))
+    if not car_id.isdigit():
+        raise ValueError("Invalid id")
+    car_info_query = f"SELECT m.doors_number, m.name, m.seats_number, m.trunk_capacity, m.produced_date, b.name, b.origin_country, t.driving_license, t.name, p.price_per_hour, p.price_per_kilometer FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id JOIN carrental_brand b ON b.id = m.brand_id_id JOIN carrental_cartype t ON t.id = m.type_id_id JOIN carrental_pricelist p ON p.id = m.price_list_id_id WHERE c.id = {car_id}"
+    with connection.cursor() as cursor:
+        cursor.execute(car_info_query)
+        data = cursor.fetchall()[0]
+    car_information = {
+        "doors_number": data[0],
+        "model_name": data[1],
+        "seats_number": data[2],
+        "trunk_capacity": data[3],
+        "produced_date": data[4],
+        "brand_name": data[5],
+        "country_of_origin": data[6],
+        "driving_license": data[7],
+        "license_desc": data[8],
+        "price_per_h": data[9],
+        "price_per_km": data[10]
+    }
+    if request.method == "POST":
+        query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
+    return render(request, "car_rent.html", {"login": login, "car_id": car_id, "car_info": car_information, "rental_status": "success"})

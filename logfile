@@ -171,3 +171,22 @@
 2023-06-14 17:01:21.810 CEST [5681] FATAL:  database "database" does not exist
 2023-06-14 17:06:19.106 CEST [6116] ERROR:  syntax error at or near "." at character 79
 2023-06-14 17:06:19.106 CEST [6116] STATEMENT:  SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id
+2023-06-14 19:33:40.282 CEST [14694] FATAL:  role "admin" does not exist
+2023-06-14 19:41:54.203 CEST [15412] ERROR:  column m.id_id does not exist at character 164
+2023-06-14 19:41:54.203 CEST [15412] STATEMENT:  SELECT * FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id JOIN carrental_brand b ON b.id = m.brand_id_id JOIN carrental_cartype t ON t.id = m.id_id JOIN carrental_pricelist p ON p.id = m.price_list_id_id;
+2023-06-14 19:59:52.585 CEST [17504] ERROR:  column m.prodoced_data does not exist at character 66
+2023-06-14 19:59:52.585 CEST [17504] HINT:  Perhaps you meant to reference the column "m.produced_date".
+2023-06-14 19:59:52.585 CEST [17504] STATEMENT:  SELECT m.doors_number, m.name, m.seats_number, m.trunk_capacity, m.prodoced_data, b.name, b.origin_country, t.driving_license, t.name, p.price_per_hour, p.price_per_kilometer FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id JOIN carrental_brand b ON b.id = m.brand_id_id JOIN carrental_cartype t ON t.id = m.type_id_id JOIN carrental_pricelist p ON p.id = m.price_list_id_id WHERE c.id = 3
+2023-06-14 20:00:12.912 CEST [17618] ERROR:  column m.produced_data does not exist at character 66
+2023-06-14 20:00:12.912 CEST [17618] HINT:  Perhaps you meant to reference the column "m.produced_date".
+2023-06-14 20:00:12.912 CEST [17618] STATEMENT:  SELECT m.doors_number, m.name, m.seats_number, m.trunk_capacity, m.produced_data, b.name, b.origin_country, t.driving_license, t.name, p.price_per_hour, p.price_per_kilometer FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id JOIN carrental_brand b ON b.id = m.brand_id_id JOIN carrental_cartype t ON t.id = m.type_id_id JOIN carrental_pricelist p ON p.id = m.price_list_id_id WHERE c.id = 3
+2023-06-14 23:12:11.125 CEST [26538] ERROR:  syntax error at or near "SELECT" at character 60
+2023-06-14 23:12:11.125 CEST [26538] STATEMENT:  SELECT id FROM carrental_client WHERE login = 'jennyjones'
+	SELECT id FROM carrental_client WHERE login = 'jennyjones';
+2023-06-14 23:34:38.673 CEST [28156] ERROR:  relation "car" does not exist at character 8
+2023-06-14 23:34:38.673 CEST [28156] STATEMENT:  UPDATE CAR SET car_status = 'rented' where id = 1
+2023-06-14 23:40:53.393 CEST [28820] ERROR:  relation "r" does not exist at character 15
+2023-06-14 23:40:53.393 CEST [28820] STATEMENT:  SELECT * from r carrental_rental JOIN c carrental_client on r.client_id = c.id WHERE c.login = 'bobsmith';
+2023-06-14 23:41:26.101 CEST [28820] ERROR:  column "client_id" does not exist at character 58
+2023-06-14 23:41:26.101 CEST [28820] HINT:  Perhaps you meant to reference the column "carrental_rental.client_id_id".
+2023-06-14 23:41:26.101 CEST [28820] STATEMENT:  SELECT * from  carrental_rental JOIN carrental_client on client_id = id WHERE login = 'bobsmith';

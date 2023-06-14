@@ -78,6 +78,18 @@
       right: 0;
       /* Przesuwamy przycisk na prawo */
     }
+    
+    .cancelbtnn {
+    padding: 10px 18px;
+    background-color: #04AA6D;
+    color: white;
+    max-width: 250px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 5%; /* Przesuwamy przycisk na środek pionowo */
+    right: 20%; /* Przesuwamy przycisk na prawo */
+   } 
 
     .container {
       padding: 16px;
@@ -111,11 +123,17 @@
   <div class="container">
     <div class="header">
       <h1>Logged out</h1>
-      <button onclick="redirectToRegisterSite()" class="cancelbtn">Create account</button>
+      <button onclick="redirectToRegisterSite()" class="cancelbtn">Create account for person</button>
       <script>
         function redirectToRegisterSite() {
           window.location.href = "/registration_person/";
         }
+      </script>
+      <button onclick="redirectToRegisterCompanySite()" class="cancelbtnn">Create account for company</button>
+      <script>
+          function redirectToRegisterCompanySite() {
+              window.location.href = "/registration_company/";
+          }
       </script>
     </div>
     <small><a href="{% url 'base' %}">Login again</a></small>
