@@ -1,0 +1,56 @@
+[
+    {
+        "model": "carrental.CarFault",
+        "pk": 1,
+        "fields": {
+            "report_id": 1,
+            "repair_id": 1,
+            "description": "Scratch removal"
+        }
+    },
+    {
+        "model": "carrental.CarFault",
+        "pk": 2,
+        "fields": {
+            "report_id": 2,
+            "repair_id": 2,
+            "description": "Car general cleaning"
+        }
+    },
+    {
+        "model": "carrental.CarFault",
+        "pk": 3,
+        "fields": {
+            "report_id": 3,
+            "repair_id": 3,
+            "description": "Air coditioning repair"
+        }
+    },
+    {
+        "model": "carrental.CarFault",
+        "pk": 4,
+        "fields": {
+            "report_id": 4,
+            "repair_id": 4,
+            "description": "Tires swap"
+        }
+    },
+    {
+        "model": "carrental.CarFault",
+        "pk": 5,
+        "fields": {
+            "report_id": 6,
+            "repair_id": 5,
+            "description": "Car retrofitting"
+        }
+    },
+    {
+        "model": "carrental.CarFault",
+        "pk": 6,
+        "fields": {
+            "report_id": 7,
+            "repair_id": 6,
+            "description": "Mirror repair"
+        }
+    }
+]
