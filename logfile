@@ -166,3 +166,8 @@
 	$$
 	LANGUAGE plpgsql;
 	
+2023-06-14 16:57:18.581 CEST [5414] FATAL:  database "ejzakb" does not exist
+2023-06-14 17:01:13.829 CEST [5632] FATAL:  database "admin1" does not exist
+2023-06-14 17:01:21.810 CEST [5681] FATAL:  database "database" does not exist
+2023-06-14 17:06:19.106 CEST [6116] ERROR:  syntax error at or near "." at character 79
+2023-06-14 17:06:19.106 CEST [6116] STATEMENT:  SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id
