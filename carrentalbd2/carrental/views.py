@@ -11,6 +11,63 @@ from .models import Person, Company
 
 # Create your views here.
 
+def my_account(request):
+    # try person
+    username = str(request.GET.get("login"))
+    my_user_data = None
+    query = ""
+    user_data_dict = {}
+    user_data = []
+    my_user_data = []
+    with connection.cursor() as cursor:
+        with open('views/client_person.sql') as f:
+            query = f.read()
+            cursor.execute(query, [username])
+            user_data = cursor.fetchall()
+    if len(user_data) > 0:
+        my_user_data = user_data[0]
+        user_data_dict = {
+            "first_name" : my_user_data[4],
+            "pesel" : my_user_data[5],
+            "surname" : my_user_data[6]
+        }
+    else:
+        with connection.cursor() as cursor:
+            with open('views/client_company.sql') as f:
+                query = f.read()
+                cursor.execute(query, [username])
+                user_data = cursor.fetchall()
+        my_user_data = user_data[0]
+        user_data_dict = {
+            "name" : my_user_data[4],
+            "nip" : my_user_data[5],
+            "sector" : my_user_data[6]
+        }
+    user_data_dict["country"] = my_user_data[0]
+    user_data_dict["email"] = my_user_data[1]
+    user_data_dict["login"] = my_user_data[2]
+    user_data_dict["phone"] = my_user_data[3]
+
+    with connection.cursor() as cursor:
+        with open('views/users_rental.sql') as f:
+            query = f.read()
+            cursor.execute(query, [my_user_data[7]])
+            rentals = cursor.fetchall()
+    rentals_dicts = [
+        {
+            "model": rental[0],
+            "plate": rental[1],
+            "rental_id": rental[2],
+            "start_date": rental[3],
+        }
+        for rental in rentals
+    ]
+    context = {
+        "user" : user_data_dict,
+        "rentals" : rentals_dicts
+    }
+    return render(request, "my_account.html", context)
+
 
 def log_screen_view(request):
     # loading procedures and fubctions to database
@@ -138,10 +195,11 @@ def check_log(request):
 
 def main_window(request):
     login = str(request.GET.get("login"))
-    query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
-        cursor.execute(query)
-        data = cursor.fetchall()
+        with open('views/car_model_car.sql') as view:
+            query = view.read()
+            cursor.execute(query)
+            data = cursor.fetchall()
     cars_list = [
         {
             "model": car[1],
@@ -158,7 +216,7 @@ def main_window(request):
     page_obj = p.get_page(page_number)
     for el in page_obj:
         print(el)
-    context = {"page_obj": page_obj, "username": login}
+    context = {"page_obj": page_obj, "login": login}
     return render(request, "main_window.html", context)
 
 def car_rent(request):

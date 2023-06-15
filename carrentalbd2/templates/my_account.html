@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            /* Wyśrodkowujemy zawartość w pionie */
+            justify-content: space-between;
+            /* Rozmieszczamy elementy na przeciwnych krańcach */
+        }
+
+
+        .cancelbtn {
+            padding: 5px 5px;
+            background-color: #04AA6D;
+            color: white;
+            max-width: 300px;
+            border: none;
+            cursor: pointer;
+            align-items: center;
+            text-align: center;
+            top: 50%;
+            /* Przesuwamy przycisk na środek pionowo */
+            right: 0;
+            /* Przesuwamy przycisk na prawo */
+        }
+
+        .container {
+            padding: 16px;
+            position: relative;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        p, li, a{
+            font-size: 20px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Username account: {{ user.login }}</h1>
+<p>Email: {{user.email}}</p>
+<p>Phone: {{user.phone}}</p>
+
+{% if user.first_name %}
+<p>Name: {{user.first_name}}</p>
+<p>Second name: {{user.surname}}</p>
+<p>Pesel: {{user.pesel}}</p>
+{% endif %}
+
+{% if user.name %}
+<p>Company name: {{user.name}}</p>
+<p>Nip: {{user.nip}}</p>
+<p>Sector: {{user.sector}}</p>
+{% endif %}
+<p>Country: {{user.country}}</p>
+
+<p>My history</p>
+
+{% for rental in rentals %}
+<div style="display: grid; place-items: center;">
+     <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
+</div>
+{% endfor %}
+
+
+</body>
+</html>
