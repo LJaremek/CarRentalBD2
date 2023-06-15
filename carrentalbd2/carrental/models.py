@@ -51,15 +51,24 @@ class Brand(models.Model):
     name = models.CharField(max_length=50, unique=True, null=False)
     origin_country = models.CharField(max_length=50, null=True)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class CarType(models.Model):
     name = models.CharField(max_length=150, unique=True, null=False)
     driving_license = models.CharField(max_length=10, null=False)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class PriceList(models.Model):
     price_per_hour = models.PositiveIntegerField(null=False)
     price_per_kilometer = models.PositiveIntegerField(null=False)
+
+    def __str__(self) -> str:
+        return str(self.price_per_hour) + "\t" + str(self.price_per_kilometer)
 
 
 class CarModel(models.Model):
@@ -72,9 +81,15 @@ class CarModel(models.Model):
     doors_number = models.PositiveIntegerField(null=False)
     produced_date = models.DateField(blank=True, null=True)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class RentalStation(models.Model):
     address = models.CharField(max_length=100, null=False)
+
+    def __str__(self) -> str:
+        return self.address
 
 
 class Car(models.Model):
@@ -87,6 +102,9 @@ class Car(models.Model):
     insurance_start_date = models.DateTimeField(null=True)
     insurance_end_date = models.DateTimeField(null=True)
 
+    def __str__(self) -> str:
+        return self.plate
+
 
 class Rental(models.Model):
     client_id = models.ForeignKey(Client, null=True, on_delete=models.SET_NULL)
@@ -96,12 +114,18 @@ class Rental(models.Model):
     end_date = models.DateTimeField(blank=True, null=True)
     rental_status = models.CharField(max_length=20, choices=RENTAL_STATUS, null=False)
 
+    def __str__(self) -> str:
+        return self.pk
+
 
 class Refund(models.Model):
     rental_id = models.OneToOneField(Rental, null=True, on_delete=models.SET_NULL)
     amount = models.PositiveBigIntegerField(null=True)
     description = models.TextField(max_length=250, null=True)
     apologise_message = models.TextField(max_length=250, null=True)
+
+    def __str__(self) -> str:
+        return self.amount
 
 
 class TrafficViolation(models.Model):
@@ -110,24 +134,35 @@ class TrafficViolation(models.Model):
     description = models.TextField(max_length=250, null=False)
     penalty_points = models.PositiveIntegerField(null=True)
 
+    def __str__(self) -> str:
+        return self.description
+
 
 class Report(models.Model):
     rental_id = models.OneToOneField(Rental, on_delete=models.SET_NULL, null=True)
     description = models.CharField(max_length=250, null=False)
     rate = models.PositiveIntegerField(validators=[MaxValueValidator(10)], null=False)
 
+    def __str__(self) -> str:
+        return str(self.rate) + "\t" + self.description
+
 
 class RepairWorkshop(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True)
     telephone = models.CharField(max_length=50, null=True, unique=True)
-
     address = models.CharField(max_length=50, null=False)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class InsuranceCompany(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True)
     telephone = models.CharField(max_length=10, null=True, unique=True)
     ac = models.BooleanField(null=False)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Repair(models.Model):
@@ -147,8 +182,19 @@ class Repair(models.Model):
     start_date = models.DateTimeField(null=True)
     end_date = models.DateTimeField(null=True)
 
+    def __str__(self) -> str:
+        if self.repair_workshop_id:
+            obj = RepairWorkshop.objects.get(pk=self.repair_workshop_id.pk)
+            return obj.name
+        else:
+            obj = InsuranceCompany.objects.get(pk=self.insurance_company_id.pk)
+            return obj.name
+
 
 class CarFault(models.Model):
     report_id = models.ForeignKey(Report, null=False, on_delete=models.CASCADE)
     repair_id = models.ForeignKey(Repair, null=True, on_delete=models.CASCADE)
     description = models.TextField(max_length=250, null=False)
+
+    def __str__(self):
+        return self.description

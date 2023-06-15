@@ -73,7 +73,7 @@
             right: 0;
             /* Przesuwamy przycisk na prawo */
         }
-        
+
         .redbtn {
             padding: 5px 5px;
             background-color: #adabab;
@@ -86,7 +86,7 @@
             pointer-events: none;
             /* Przesuwamy przycisk na prawo */
         }
-        
+
         .container {
             padding: 16px;
             position: relative;
@@ -142,6 +142,10 @@
     <div class="container">
         <div class="header">
             <h1>Zalogowano jako: {{ login }}</h1>
+                <form action="{% url 'my_account' %}", method="post">
+                    {% csrf_token %}
+                    <a href="{% url 'my_account' %}?login={{ login }}"><li>My account</li></a>
+                </form>
                 <form action="{% url 'logout_user' %}">
                     {% csrf_token %}
                     <button class="cancelbtn">Logout</button>
