@@ -13,19 +13,17 @@ from .models import Person, Company
 
 def my_account(request):
     # try person
-    username = request.POST.get("username")
+    username = str(request.GET.get("login"))
     my_user_data = None
     query = ""
     user_data_dict = {}
     user_data = []
     my_user_data = []
-    query = f"""\
-    SELECT c.country, c.email, c.login, c.phone, p.first_name, p.pesel, p.surname, c.id \
-    FROM carrental_client c JOIN carrental_person p ON c.id = p.parent_id \
-    WHERE c.login = '{username}'"""
     with connection.cursor() as cursor:
-        cursor.execute(query)
-        user_data = cursor.fetchall()
+        with open('views/client_person.sql') as f:
+            query = f.read()
+            cursor.execute(query, [username])
+            user_data = cursor.fetchall()
     if len(user_data) > 0:
         my_user_data = user_data[0]
         user_data_dict = {
@@ -34,14 +32,11 @@ def my_account(request):
             "surname" : my_user_data[6]
         }
     else:
-        query = f"""\
-        SELECT c.id, c.country, c.email, c.login, c.phone, k.name, k.nip, k.sector \
-        FROM carrental_client c JOIN carrental_company k ON c.id = k.parent_id \
-        WHERE c.login = '{username}'
-        """
         with connection.cursor() as cursor:
-            cursor.execute(query)
-            user_data = cursor.fetchall()
+            with open('views/client_company.sql') as f:
+                query = f.read()
+                cursor.execute(query, [username])
+                user_data = cursor.fetchall()
         my_user_data = user_data[0]
         user_data_dict = {
             "name" : my_user_data[4],
@@ -53,12 +48,25 @@ def my_account(request):
     user_data_dict["login"] = my_user_data[2]
     user_data_dict["phone"] = my_user_data[3]
 
-    query = f"SELECT country, c.email, c.login, c.phone, k.name, k.nip, k.sector FROM client c JOIN company k ON c.id = k.id WHERE c.login = {username}"
     with connection.cursor() as cursor:
-        cursor.execute(query)
-        user_data = cursor.fetchall()
-
-    return render(request, "my_account.html")
+        with open('views/users_rental.sql') as f:
+            query = f.read()
+            cursor.execute(query, [my_user_data[7]])
+            rentals = cursor.fetchall()
+    rentals_dicts = [
+        {
+            "model": rental[0],
+            "plate": rental[1],
+            "rental_id": rental[2],
+            "start_date": rental[3],
+        }
+        for rental in rentals
+    ]
+    context = {
+        "user" : user_data_dict,
+        "rentals" : rentals_dicts
+    }
+    return render(request, "my_account.html", context)
 
 
 def log_screen_view(request):
@@ -208,7 +216,7 @@ def main_window(request):
     page_obj = p.get_page(page_number)
     for el in page_obj:
         print(el)
-    context = {"page_obj": page_obj, "username": login}
+    context = {"page_obj": page_obj, "login": login}
     return render(request, "main_window.html", context)
 
 def car_rent(request):
