@@ -24,6 +24,7 @@ def create_initial_data(sender, **kwargs):
             "TrafficViolation.json",
             "Raport.json",
             "Refund.json",
+            "CarFault.json",
         ]
         for file in model_files:
             call_command("loaddata", file)

@@ -285,3 +285,42 @@ BEGIN
     DELETE FROM carrental_client WHERE login='';
 END;
 $$ LANGUAGE plpgsql;
+
+
+----------------------------------
+-- Demand by car model report --
+----------------------------------
+CREATE OR REPLACE FUNCTION count_rental_by_car_model()
+  RETURNS TABLE(car_model_name VARCHAR(50), rental_count BIGINT) AS
+$$
+BEGIN
+  RETURN QUERY
+    SELECT m.name, COUNT(r.id) AS rental_count
+    FROM carrental_rental r
+    JOIN carrental_car c ON c.id = r.car_id_id
+    JOIN carrental_carmodel m ON c.car_model_id = m.id
+    GROUP BY m.name;
+END;
+$$
+LANGUAGE plpgsql;
+
+
+----------------------------------
+-- Cost of repairs by car model --
+----------------------------------
+CREATE OR REPLACE FUNCTION count_costs_by_car_model()
+  RETURNS TABLE(car_model_name VARCHAR(50), costs_count BIGINT, costs_sum BIGINT) AS
+$$
+BEGIN
+  RETURN QUERY
+    SELECT m.name, COUNT(r.cost), SUM(r.cost) AS rental_count
+    FROM carrental_carfault f
+    JOIN carrental_repair r ON r.id = f.repair_id_id
+    LEFT JOIN carrental_report rep ON rep.id = f.report_id_id
+    LEFT JOIN carrental_rental ren ON ren.id = rep.rental_id_id
+    JOIN carrental_car c ON c.id = ren.car_id_id
+    JOIN carrental_carmodel m ON c.car_model_id = m.id
+    GROUP BY m.name;
+END;
+$$
+LANGUAGE plpgsql;
