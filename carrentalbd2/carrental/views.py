@@ -57,6 +57,7 @@ def my_account(request):
             "plate": rental[1],
             "rental_id": rental[2],
             "start_date": rental[3],
+            "car_id": rental[4]
         }
         for rental in rentals
     ]
@@ -73,6 +74,8 @@ def my_account(request):
             "plate": r_hist[1],
             "rental_id": r_hist[2],
             "start_date": r_hist[3],
+            "end_date": r_hist[4],
+            "car_id": r_hist[5]
         }
         for r_hist in rentals_history
     ]
@@ -301,5 +304,48 @@ def car_rent(request):
             "car_id": car_id,
             "car_info": car_information,
             "rental_status": "success",
+        },
+    )
+
+
+def car_cancel(request):
+    car_id = str(request.GET.get("car_id"))
+    login = str(request.GET.get("login"))
+    if not car_id.isdigit():
+        raise ValueError("Invalid id")
+    car_info_query = f"SELECT m.doors_number, m.name, m.seats_number, m.trunk_capacity, m.produced_date, b.name, b.origin_country, t.driving_license, t.name, p.price_per_hour, p.price_per_kilometer, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id JOIN carrental_brand b ON b.id = m.brand_id_id JOIN carrental_cartype t ON t.id = m.type_id_id JOIN carrental_pricelist p ON p.id = m.price_list_id_id WHERE c.id = {car_id}"
+    with connection.cursor() as cursor:
+        cursor.execute(car_info_query)
+        data = cursor.fetchall()[0]
+
+    with connection.cursor() as cursor:
+        with open("views/rental_start_date.sql") as view:
+            query = view.read()
+            cursor.execute(query, str(data[11]))
+            start_date = cursor.fetchall()
+
+    print(len(start_date))
+
+    car_information = {
+        "doors_number": data[0],
+        "model_name": data[1],
+        "seats_number": data[2],
+        "trunk_capacity": data[3],
+        "produced_date": data[4],
+        "brand_name": data[5],
+        "country_of_origin": data[6],
+        "driving_license": data[7],
+        "license_desc": data[8],
+        "price_per_h": data[9],
+        "price_per_km": data[10],
+    }
+    return render(
+        request,
+        "car_cancel.html",
+        {
+            "login": login,
+            "car_id": car_id,
+            "car_info": car_information,
+            "cancel_status": "success",
         },
     )

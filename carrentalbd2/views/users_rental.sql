@@ -1,4 +1,4 @@
-SELECT m.name, c.plate, r.id, r.start_date
+SELECT m.name, c.plate, r.id, r.start_date, c.id
 FROM carrental_client k
 JOIN carrental_rental r ON r.client_id_id = k.id
 JOIN carrental_car c ON r.car_id_id = c.id

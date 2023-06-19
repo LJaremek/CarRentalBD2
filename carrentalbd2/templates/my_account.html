@@ -47,7 +47,7 @@
             padding: 5px 5px;
             background-color: #04AA6D;
             color: white;
-            max-width: 300px;
+            max-width: 400px;
             border: none;
             cursor: pointer;
             align-items: center;
@@ -61,6 +61,13 @@
         .container {
             padding: 16px;
             position: relative;
+        }
+
+        .container-cars {
+            padding: 8px;
+            position: relative;
+            display: grid;
+            place-items: center;
         }
 
         span.psw {
@@ -107,8 +114,8 @@
     <h1>My active cars</h1>
 
     {% for rental in rentals %}
-    <div style="display: grid; place-items: center;">
-        <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
+    <div class="container-cars">
+        <a href="{% url 'car_cancel' %}?login={{ user.login }}&car_id={{ rental.car_id }}" class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</a>
     </div>
     {% empty %}
     <p>You don't have any active cars</p>
@@ -117,9 +124,7 @@
     <h1>Rental history</h1>
 
     {% for rental in rentals.history %}
-    <div style="display: grid; place-items: center;">
-        <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
-    </div>
+     <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
     {% empty %}
     <p>Your rental history is empty</p>
     {% endfor %}
