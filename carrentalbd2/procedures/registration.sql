@@ -324,3 +324,78 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+
+----------------------------------
+-- Trigger changing car status after fault --
+----------------------------------
+CREATE OR REPLACE FUNCTION car_fault_change_car_status() RETURNS TRIGGER AS $$
+BEGIN
+
+    IF TG_OP = 'INSERT' THEN
+        UPDATE carrental_car
+        SET car_status = 'service'
+        FROM carrental_rental
+        JOIN carrental_report ON carrental_rental.id = carrental_report.rental_id_id
+        JOIN carrental_carfault ON carrental_report.id = carrental_carfault.report_id_id
+        WHERE carrental_carfault.id = NEW.id AND carrental_car.id = carrental_rental.car_id_id;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS carfault_insert_trigger ON carrental_carfault;
+
+CREATE TRIGGER carfault_insert_trigger
+AFTER INSERT ON carrental_carfault
+FOR EACH ROW
+EXECUTE FUNCTION car_fault_change_car_status();
+
+
+
+----------------------------------
+-- Trigger changing car status after new ongoing rent --
+----------------------------------
+
+CREATE OR REPLACE FUNCTION car_status_change_after_rent() RETURNS TRIGGER AS $$
+BEGIN
+
+    UPDATE carrental_car
+    SET car_status = 'rented'
+    FROM carrental_rental
+    WHERE carrental_car.id = NEW.car_id_id AND NEW.rental_status = 'ongoing';
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS car_status_change_after_rent ON carrental_rental;
+
+CREATE TRIGGER car_status_change_after_rent
+AFTER INSERT OR UPDATE ON carrental_rental
+FOR EACH ROW
+EXECUTE FUNCTION car_status_change_after_rent();
+
+----------------------------------
+-- Trigger changing car status after finished rent --
+----------------------------------
+
+CREATE OR REPLACE FUNCTION car_status_change_free() RETURNS TRIGGER AS $$
+BEGIN
+
+    UPDATE carrental_car
+    SET car_status = 'free'
+    FROM carrental_rental
+    WHERE carrental_car.id = NEW.car_id_id AND NEW.rental_status = 'finished';
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+DROP TRIGGER IF EXISTS car_status_change_after_rent ON carrental_rental;
+
+CREATE TRIGGER car_status_change_after_rent
+AFTER UPDATE ON carrental_rental
+FOR EACH ROW
+EXECUTE FUNCTION car_status_change_free();

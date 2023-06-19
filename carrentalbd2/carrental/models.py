@@ -115,7 +115,7 @@ class Rental(models.Model):
     rental_status = models.CharField(max_length=20, choices=RENTAL_STATUS, null=False)
 
     def __str__(self) -> str:
-        return self.pk
+        return str(self.pk)
 
 
 class Refund(models.Model):
@@ -144,7 +144,7 @@ class Report(models.Model):
     rate = models.PositiveIntegerField(validators=[MaxValueValidator(10)], null=False)
 
     def __str__(self) -> str:
-        return str(self.rate) + "\t" + self.description
+        return "pk: " + str(self.pk) +" "+ str(self.rate) + "\t" + self.description
 
 
 class RepairWorkshop(models.Model):
@@ -197,4 +197,4 @@ class CarFault(models.Model):
     description = models.TextField(max_length=250, null=False)
 
     def __str__(self):
-        return self.description
+        return str(self.description)
