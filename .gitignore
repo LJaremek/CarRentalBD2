@@ -11,6 +11,8 @@ carrentalbd2/run.sh
 carrentalbd2/main_key.pem
 carrentalbd2/carrentalbd2/settings.py
 
+migrations
+
 carrentalbd2/database/
 carrentalbd2/logfile
 *.pem

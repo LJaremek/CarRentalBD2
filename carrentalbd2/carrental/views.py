@@ -3,14 +3,11 @@ from .forms import MyForm, MyCompanyForm
 from django.db import connection
 from django.core.paginator import Paginator
 from carrental.models import Client
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as log
 from .models import Person, Company, Rental, Car
 from django.utils import timezone
 
 # Create your views here.
+
 
 def my_account(request):
     # try person
@@ -21,28 +18,28 @@ def my_account(request):
     user_data = []
     my_user_data = []
     with connection.cursor() as cursor:
-        with open('views/client_person.sql') as f:
+        with open("views/client_person.sql") as f:
             query = f.read()
             cursor.execute(query, [username])
             user_data = cursor.fetchall()
     if len(user_data) > 0:
         my_user_data = user_data[0]
         user_data_dict = {
-            "first_name" : my_user_data[4],
-            "pesel" : my_user_data[5],
-            "surname" : my_user_data[6]
+            "first_name": my_user_data[4],
+            "pesel": my_user_data[5],
+            "surname": my_user_data[6],
         }
     else:
         with connection.cursor() as cursor:
-            with open('views/client_company.sql') as f:
+            with open("views/client_company.sql") as f:
                 query = f.read()
                 cursor.execute(query, [username])
                 user_data = cursor.fetchall()
         my_user_data = user_data[0]
         user_data_dict = {
-            "name" : my_user_data[4],
-            "nip" : my_user_data[5],
-            "sector" : my_user_data[6]
+            "name": my_user_data[4],
+            "nip": my_user_data[5],
+            "sector": my_user_data[6],
         }
     user_data_dict["country"] = my_user_data[0]
     user_data_dict["email"] = my_user_data[1]
@@ -50,7 +47,7 @@ def my_account(request):
     user_data_dict["phone"] = my_user_data[3]
 
     with connection.cursor() as cursor:
-        with open('views/users_rental.sql') as f:
+        with open("views/users_rental.sql") as f:
             query = f.read()
             cursor.execute(query, [my_user_data[7]])
             rentals = cursor.fetchall()
@@ -63,20 +60,38 @@ def my_account(request):
         }
         for rental in rentals
     ]
+
+    with connection.cursor() as cursor:
+        with open("views/user_rental_history.sql") as f:
+            # select rental history - rentals with end date not null
+            query = f.read()
+            cursor.execute(query, [my_user_data[7]])
+            rentals_history = cursor.fetchall()
+    rentals_history_dict = [
+        {
+            "model": r_hist[0],
+            "plate": r_hist[1],
+            "rental_id": r_hist[2],
+            "start_date": r_hist[3],
+        }
+        for r_hist in rentals_history
+    ]
+
     context = {
-        "user" : user_data_dict,
-        "rentals" : rentals_dicts
+        "user": user_data_dict,
+        "rentals": rentals_dicts,
+        "rentals_history": rentals_history_dict,
     }
     return render(request, "my_account.html", context)
 
 
 def log_screen_view(request):
-    # loading procedures and fubctions to database
-    with open('procedures/registration.sql', 'r') as sql_file:
+    # loading procedures and functions to database
+    with open("procedures/registration.sql", "r") as sql_file:
         sql = sql_file.read()
     with connection.cursor() as cursor:
         cursor.execute(sql)
-    with open('procedures/check_login.sql', 'r') as sql_file:
+    with open("procedures/check_login.sql", "r") as sql_file:
         sql = sql_file.read()
     with connection.cursor() as cursor:
         cursor.execute(sql)
@@ -102,7 +117,19 @@ def registration_person(request):
             # Process the form data or save it to the database
             try:
                 with connection.cursor() as cursor:
-                    cursor.callproc('validate_input_data_person', [ username, email, password, repeated_password, phone, pesel, first_name, second_name ])
+                    cursor.callproc(
+                        "validate_input_data_person",
+                        [
+                            username,
+                            email,
+                            password,
+                            repeated_password,
+                            phone,
+                            pesel,
+                            first_name,
+                            second_name,
+                        ],
+                    )
                     client = Client.objects.create(
                         login=username,
                         email=email,
@@ -119,8 +146,8 @@ def registration_person(request):
                     )
                     person.save()
                     with connection.cursor() as cursor:
-                        cursor.execute('CALL fix_bug_person_empty_record()')
-            except:
+                        cursor.execute("CALL fix_bug_person_empty_record()")
+            except Exception:
                 return redirect("/base/?text={}".format("Unuccessful registration"))
 
             return redirect("/base/?text={}".format("Successful registration"))
@@ -146,16 +173,18 @@ def registration_company(request):
             # Process the form data or save it to the database
             try:
                 with connection.cursor() as cursor:
-                    cursor.callproc('validate_input_data_company', [
-                        username,
-                        email,
-                        password,
-                        repeated_password,
-                        phone,
-                        nip,
-                        name,
-                        sector
-                        ]
+                    cursor.callproc(
+                        "validate_input_data_company",
+                        [
+                            username,
+                            email,
+                            password,
+                            repeated_password,
+                            phone,
+                            nip,
+                            name,
+                            sector,
+                        ],
                     )
 
                 client = Client.objects.create(
@@ -171,10 +200,9 @@ def registration_company(request):
                 )
                 comapny.save()
                 with connection.cursor() as cursor:
-                    cursor.execute('CALL fix_bug_company_empty_record()')
+                    cursor.execute("CALL fix_bug_company_empty_record()")
             except Exception:
                 return redirect("/base/?text={}".format("Wrong data format"))
-
 
             return redirect("/base/?text={}".format("Successful registration"))
     else:
@@ -194,6 +222,7 @@ def check_log(request):
             return redirect("/base/?text={}".format("Login failed"))
     return redirect("/main_window/?login={}".format(login))
 
+
 def main_window(request):
     login = str(request.GET.get("login"))
     rent_status = str(request.GET.get("rent_status"))
@@ -210,7 +239,7 @@ def main_window(request):
             station_id=None,
             start_date=timezone.now(),
             end_date=None,
-            rental_status="rented"
+            rental_status="rented",
         )
         rental.save()
         query = f"UPDATE carrental_car SET car_status = 'rented' where id = {ca_id}"
@@ -218,7 +247,7 @@ def main_window(request):
             cursor.execute(query)
     query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
     with connection.cursor() as cursor:
-        with open('views/car_model_car.sql') as view:
+        with open("views/car_model_car.sql") as view:
             query = view.read()
             cursor.execute(query)
             data = cursor.fetchall()
@@ -229,7 +258,7 @@ def main_window(request):
             "doors_number": car[3],
             "status": car[0],
             "date_produced": car[4],
-            "id": car[5]
+            "id": car[5],
         }
         for car in data
     ]
@@ -239,8 +268,8 @@ def main_window(request):
     context = {"page_obj": page_obj, "login": login, "rent_status": rent_status}
     return render(request, "main_window.html", context)
 
+
 def car_rent(request):
-    # TODO
     car_id = str(request.GET.get("car_id"))
     login = str(request.GET.get("login"))
     if not car_id.isdigit():
@@ -260,8 +289,17 @@ def car_rent(request):
         "driving_license": data[7],
         "license_desc": data[8],
         "price_per_h": data[9],
-        "price_per_km": data[10]
+        "price_per_km": data[10],
     }
     if request.method == "POST":
         query = "SELECT c.car_status, m.name, m.seats_number, m.doors_number, m.produced_date, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id"
-    return render(request, "car_rent.html", {"login": login, "car_id": car_id, "car_info": car_information, "rental_status": "success"})
+    return render(
+        request,
+        "car_rent.html",
+        {
+            "login": login,
+            "car_id": car_id,
+            "car_info": car_information,
+            "rental_status": "success",
+        },
+    )

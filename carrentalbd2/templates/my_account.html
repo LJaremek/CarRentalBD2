@@ -1,8 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
     <style>
+
+        a {
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
+        p,li,a {
+            font-size: 14px;
+            text-align: center;
+        }
+
+
         button {
             background-color: #04AA6D;
             color: white;
@@ -19,6 +36,10 @@
             /* Wyśrodkowujemy zawartość w pionie */
             justify-content: space-between;
             /* Rozmieszczamy elementy na przeciwnych krańcach */
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
         }
 
 
@@ -50,40 +71,59 @@
         h1 {
             text-align: center;
         }
-        p, li, a{
-            font-size: 20px;
-            text-align: center;
-        }
 
     </style>
+
 </head>
+
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>Logged in as: {{ user.login }}</h1>
+            <form action="{% url 'main_window' %}" , method="post">
+                <a href="{% url 'main_window' %}?login={{ user.login }}" class="cancelbtn">Go back</a>
+            </form>
+        </div>
+    </div>
 
-<h1>Username account: {{ user.login }}</h1>
-<p>Email: {{user.email}}</p>
-<p>Phone: {{user.phone}}</p>
 
-{% if user.first_name %}
-<p>Name: {{user.first_name}}</p>
-<p>Second name: {{user.surname}}</p>
-<p>Pesel: {{user.pesel}}</p>
-{% endif %}
+    <h1>Account information</h1>
+    <p>Email: {{user.email}}</p>
+    <p>Phone: {{user.phone}}</p>
 
-{% if user.name %}
-<p>Company name: {{user.name}}</p>
-<p>Nip: {{user.nip}}</p>
-<p>Sector: {{user.sector}}</p>
-{% endif %}
-<p>Country: {{user.country}}</p>
+    {% if user.first_name %}
+    <p>Name: {{user.first_name}}</p>
+    <p>Second name: {{user.surname}}</p>
+    <p>Pesel: {{user.pesel}}</p>
+    {% endif %}
 
-<p>My history</p>
+    {% if user.name %}
+    <p>Company name: {{user.name}}</p>
+    <p>Nip: {{user.nip}}</p>
+    <p>Sector: {{user.sector}}</p>
+    {% endif %}
+    <p>Country: {{user.country}}</p>
 
-{% for rental in rentals %}
-<div style="display: grid; place-items: center;">
-     <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
-</div>
-{% endfor %}
+    <h1>My active cars</h1>
 
+    {% for rental in rentals %}
+    <div style="display: grid; place-items: center;">
+        <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
+    </div>
+    {% empty %}
+    <p>You don't have any active cars</p>
+    {% endfor %}
+
+    <h1>Rental history</h1>
+
+    {% for rental in rentals.history %}
+    <div style="display: grid; place-items: center;">
+        <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
+    </div>
+    {% empty %}
+    <p>Your rental history is empty</p>
+    {% endfor %}
 
 </body>
+
 </html>
