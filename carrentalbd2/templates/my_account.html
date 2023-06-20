@@ -95,6 +95,12 @@
 
 
     <h1>Account information</h1>
+
+    {% if user.first_name %}
+    <p>Account type: Person</p>
+    {% elif user.name %}
+    <p>Account type: Company</p>
+    {% endif %}
     <p>Email: {{user.email}}</p>
     <p>Phone: {{user.phone}}</p>
 
