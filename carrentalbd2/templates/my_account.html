@@ -47,7 +47,7 @@
             padding: 5px 5px;
             background-color: #04AA6D;
             color: white;
-            max-width: 400px;
+            width: 600px;
             border: none;
             cursor: pointer;
             align-items: center;
@@ -98,6 +98,7 @@
     <p>Email: {{user.email}}</p>
     <p>Phone: {{user.phone}}</p>
 
+
     {% if user.first_name %}
     <p>Name: {{user.first_name}}</p>
     <p>Second name: {{user.surname}}</p>
@@ -111,11 +112,15 @@
     {% endif %}
     <p>Country: {{user.country}}</p>
 
+    {%if cancel_status == "success" %}
+    <h1>Rental ended successfully</h1>
+    {% endif %}
+
     <h1>My active cars</h1>
 
     {% for rental in rentals %}
     <div class="container-cars">
-        <a href="{% url 'car_cancel' %}?login={{ user.login }}&car_id={{ rental.car_id }}" class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</a>
+        <a href="{% url 'car_cancel' %}?login={{ user.login }}&car_id={{ rental.car_id }}&rental_id={{ rental.rental_id }}" class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</a>
     </div>
     {% empty %}
     <p>You don't have any active cars</p>
@@ -123,8 +128,10 @@
 
     <h1>Rental history</h1>
 
-    {% for rental in rentals.history %}
-     <button class="cancelbtn">{{ rental.model }}, {{ rental.start_date }}, {{ rental.plate }}</button>
+    {% for r in rentals_history %}
+    <div class="container-cars">
+        <a class="cancelbtn">{{ r.model }}, {{ r.start_date }}, {{ r.end_date }}{{ r.plate }}</a>
+    </div>
     {% empty %}
     <p>Your rental history is empty</p>
     {% endfor %}

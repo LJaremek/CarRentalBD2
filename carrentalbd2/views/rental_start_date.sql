@@ -1,1 +1,0 @@
-SELECT r.start_date FROM carrental_rental r JOIN carrental_car c ON r.car_id_id = c.id WHERE c.id = %s;

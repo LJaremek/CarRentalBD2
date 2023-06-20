@@ -138,6 +138,7 @@
 </div>
 
 <div class="container">
+    <p>Rental start date: {{ rent_start_date }}</p>
   <p> Car information: </p>
     <ul>
     <li>Car model:{{ car_info.model_name }}</li>
@@ -154,7 +155,7 @@
   </ul>
 
 </div>
-<form action="{% url 'my_account' %}?login={{ login }}&cancel_status=success&car_id={{ car_id }}" method="post">
+<form action="{% url 'my_account' %}?login={{ login }}&cancel_status=success&rental_id={{ rental_id }}" method="post">
   {% csrf_token %}
   <button type="submit" class="submit">End the rental</button>
 </form>

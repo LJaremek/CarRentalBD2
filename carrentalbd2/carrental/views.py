@@ -12,6 +12,7 @@ from django.utils import timezone
 def my_account(request):
     # try person
     username = str(request.GET.get("login"))
+    cancel_status = str(request.GET.get("cancel_status"))
     my_user_data = None
     query = ""
     user_data_dict = {}
@@ -62,6 +63,15 @@ def my_account(request):
         for rental in rentals
     ]
 
+    # for cancelling rentals:
+    if cancel_status == "success":
+        rent_id = str(request.GET.get("rental_id"))
+        print(rent_id)
+        with connection.cursor() as cursor:
+            with open("views/cancel_rent.sql") as f:
+                query = f.read()
+                cursor.execute(query, [rent_id])
+
     with connection.cursor() as cursor:
         with open("views/user_rental_history.sql") as f:
             # select rental history - rentals with end date not null
@@ -80,10 +90,12 @@ def my_account(request):
         for r_hist in rentals_history
     ]
 
+
     context = {
         "user": user_data_dict,
         "rentals": rentals_dicts,
         "rentals_history": rentals_history_dict,
+        "cancel_status": cancel_status
     }
     return render(request, "my_account.html", context)
 
@@ -311,6 +323,7 @@ def car_rent(request):
 def car_cancel(request):
     car_id = str(request.GET.get("car_id"))
     login = str(request.GET.get("login"))
+    rental_id = str(request.GET.get("rental_id"))
     if not car_id.isdigit():
         raise ValueError("Invalid id")
     car_info_query = f"SELECT m.doors_number, m.name, m.seats_number, m.trunk_capacity, m.produced_date, b.name, b.origin_country, t.driving_license, t.name, p.price_per_hour, p.price_per_kilometer, c.id FROM carrental_car c JOIN carrental_carmodel m ON c.car_model_id = m.id JOIN carrental_brand b ON b.id = m.brand_id_id JOIN carrental_cartype t ON t.id = m.type_id_id JOIN carrental_pricelist p ON p.id = m.price_list_id_id WHERE c.id = {car_id}"
@@ -319,12 +332,9 @@ def car_cancel(request):
         data = cursor.fetchall()[0]
 
     with connection.cursor() as cursor:
-        with open("views/rental_start_date.sql") as view:
-            query = view.read()
-            cursor.execute(query, str(data[11]))
-            start_date = cursor.fetchall()
-
-    print(len(start_date))
+        start_date_query = f"SELECT start_date FROM carrental_rental WHERE id={rental_id}"
+        cursor.execute(start_date_query)
+        start_date = cursor.fetchone()[0]
 
     car_information = {
         "doors_number": data[0],
@@ -339,6 +349,7 @@ def car_cancel(request):
         "price_per_h": data[9],
         "price_per_km": data[10],
     }
+
     return render(
         request,
         "car_cancel.html",
@@ -346,6 +357,8 @@ def car_cancel(request):
             "login": login,
             "car_id": car_id,
             "car_info": car_information,
-            "cancel_status": "success",
+            "rent_start_date": start_date,
+            "rental_id": rental_id,
+            "cancel_status": "success"
         },
     )
