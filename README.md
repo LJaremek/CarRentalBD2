@@ -1,6 +1,21 @@
 # CarRentalBD2
 Car Rental for Bazy Danych 2
 
+## Szybki start
+
+### Zbudowanie repo
+```
+cd carrentalbd2
+chmod +x ./init.sh
+./init.sh
+```
+
+### Włączenie servera
+```
+chmod +x ./run.sh
+./run.sh
+```
+
 
 ## Instalacja wymaganych bibliotek
 ```
@@ -9,17 +24,17 @@ pip install -r requirements.txt
 
 ## Robienie migracji
 ```
-python .\manage.py makemigrations
-python .\manage.py migrate
+python3 ./manage.py makemigrations
+python3 ./manage.py migrate
 ```
 ## Tworzenie admina
 ```
-python .\manage.py createsuperuser
+python3 ./manage.py createsuperuser
 ```
 
 ## Uruchomienie servera
 ```
-python .\manage.py runserver
+python3 ./manage.py runserver 0:8000
 ```
 W przeglądarce wywołujemy http://localhost:8000/admin/. Podajemy dane logowani utworzonego w poprzednim punkcie superusera.
 
