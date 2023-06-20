@@ -25,7 +25,8 @@ from carrental.views import (
     registration_company,
     car_rent,
     main_window,
-    my_account
+    my_account,
+    car_cancel
 )
 
 urlpatterns = [
@@ -37,5 +38,6 @@ urlpatterns = [
     path("registration_company/", registration_company, name="registration_company"),
     path("my_account/", my_account, name="my_account"),
     path("car_rent/", car_rent, name="car_rent"),
+    path("car_cancel/", car_cancel, name="car_cancel"),
     path("main_window/", main_window, name="main_window")
 ]

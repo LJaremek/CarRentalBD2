@@ -130,14 +130,15 @@
 <body>
   <div class="container">
     <div class="header">
-        <h1>Car rental</h1>
-        <form action="{% url 'main_window' %}" , method="post">
-          <a href="{% url 'main_window' %}?login={{ login }}" class="cancelbtn">Go back</a>
+        <h1>Rental information</h1>
+        <form action="{% url 'my_account' %}" , method="post">
+          <a href="{% url 'my_account' %}?login={{ login }}" class="cancelbtn">Go back</a>
         </form>
     </div>
 </div>
 
 <div class="container">
+    <p>Rental start date: {{ rent_start_date }}</p>
   <p> Car information: </p>
     <ul>
     <li>Car model:{{ car_info.model_name }}</li>
@@ -154,9 +155,9 @@
   </ul>
 
 </div>
-<form action="{% url 'main_window' %}?login={{ login }}&rent_status=success&car_id={{ car_id }}" method="post">
+<form action="{% url 'my_account' %}?login={{ login }}&cancel_status=success&rental_id={{ rental_id }}" method="post">
   {% csrf_token %}
-  <button type="submit" class="submit">Rent a car</button>
+  <button type="submit" class="submit">End the rental</button>
 </form>
 </body>
 
