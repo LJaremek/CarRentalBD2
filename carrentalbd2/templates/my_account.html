@@ -130,7 +130,7 @@
 
     {% for r in rentals_history %}
     <div class="container-cars">
-        <a class="cancelbtn">{{ r.model }}, {{ r.start_date }}, {{ r.end_date }}{{ r.plate }}</a>
+        <a class="cancelbtn">{{ r.model }}, rental start: {{ r.start_date }}, rental end: {{ r.end_date }}, license plate: {{ r.plate }}</a>
     </div>
     {% empty %}
     <p>Your rental history is empty</p>
